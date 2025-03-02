@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新城中学初二15班</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./Main page.css">
+    <link rel="icon" href="./图标.png" type="image/x - icon">
+    <!-- 引入 Echarts 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+    <script src="./Handle/Main.js"></script>
+    <style>
+        /* 设置图表容器的样式 */
+        #chart-container {
+            width: 80%;
+            height: 600px;
+            margin: 50px auto;
+        }
+
+        /* 设置图表容器的样式 */
+        #chart-container {
+            width: 80%;
+            height: 400px;
+            margin: 50px auto;
+        }
+
+        /* 中考倒计时样式 */
+        #countdown {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <!-- 导航 -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+        <div class="container">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#home">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">班级相册</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#members" onclick="main()">成绩公布</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./Contact Us.html">关于我们</a></li>
+                </ul>
+                <!-- 倒计时显示 -->
+                <div id="countdown"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="container main-content">
+        <section id="home">
+            <h2 class="mb-4">欢迎来到815班级</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="class-news">
+                        <h4>最新公告</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item">第五周百日哲师</li>
+                            <li class="list-group-item">第七周一模生地考试</li>
+                            <li class="list-group-item">第四周大课间评比开始</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">重要日期</div>
+                        <div class="card-body">
+                            <p>6月30日：中考</p>
+                            <p>5月1日：劳动假期</p>
+                            <p>3月8日：妇女节</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 班级相册 -->
+        <section id="gallery" class="mt-5">
+            <h3>班级相册</h3>
+            <div class="card-container">
+                <!-- 第一张卡片 -->
+                <div class="card">
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/99758e618n1a73fbcaa16e19c307a76a?fid=1101147441454-250528-361033037544067&time=1740808800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-dQ7mfFlTgTWSXt5FN7nF2%2FAqZEQ%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=229523470118969140&dp-callid=0&file_type=0&size=c710_u400&quality=100&vuk=-&ft=video" alt="示例图片 1">
+                    <div class="card-content">
+                        <h2 class="card-title">班级图片 1</h2>
+                        <p class="card-description">暂无描述。</p>
+                    </div>
+                </div>
+                <!-- 第二张卡片 -->
+                <div class="card">
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/4bd3142famb9e342d1663483c703041f?fid=1101147441454-250528-1034780673240088&time=1740808800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-oiGHuEemnynTSInRitjNYeZhNks%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=229531604170294237&dp-callid=0&file_type=0&size=c710_u400&quality=100&vuk=-&ft=video" alt="示例图片 2">
+                    <div class="card-content">
+                        <h2 class="card-title">班级图片 2</h2>
+                        <p class="card-description">暂无描述。</p>
+                    </div>
+                </div>
+                <!-- 第三张卡片 -->
+                <div class="card">
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/391259799ocedaa376c05339233d2218?fid=1101147441454-250528-203405445447300&time=1740808800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-A2frHOPG6PUQ6v6ZkUOfxq2nRiQ%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=229560746650612462&dp-callid=0&file_type=0&size=c710_u400&quality=100&vuk=-&ft=video" alt="示例图片 3">
+                    <div class="card-content">
+                        <h2 class="card-title">班级图片 3</h2>
+                        <p class="card-description">暂无描述。</p>
+                    </div>
+                </div>
+                <!-- 第四张卡片 -->
+                <div class="card">
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/5a1287184q9a4416414b1e96a4989c53?fid=1101147441454-250528-647100567741474&time=1740808800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-ugvP3e%2FAv26%2F2img3RALD78hbMM%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=229598551941523040&dp-callid=0&file_type=0&size=c710_u400&quality=100&vuk=-&ft=video" alt="示例图片 4">
+                    <div class="card-content">
+                        <h2 class="card-title">班级图片 4</h2>
+                        <p class="card-description">暂无描述。</p>
+                    </div>
+                </div>
+                <!-- 第五张卡片 -->
+                <div class="card">
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/7598689d3m980d4018a8279399ef3d5f?fid=1101147441454-250528-1047544148694506&time=1740808800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-Lo0PNVQp%2BQJuklF6VCxR0OoVhpg%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=229659718413562296&dp-callid=0&file_type=0&size=c710_u400&quality=100&vuk=-&ft=video" alt="示例图片 5">
+                    <div class="card-content">
+                        <h2 class="card-title">班级图片 5</h2>
+                        <p class="card-description">暂无描述。</p>
+                    </div>
+                </div>
+                <!-- 第六张卡片 -->
+                <div class="card">
+                    <img src="https://thumbnail0.baidupcs.com/thumbnail/040753bber2e375f616092b6c0fe75d3?fid=1101147441454-250528-180095147847533&time=1740808800&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-v8KkonYx8HZd2YTwzxmEzseF56Q%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=229692113358994867&dp-callid=0&file_type=0&size=c710_u400&quality=100&vuk=-&ft=video" alt="示例图片 6">
+                    <div class="card-content">
+                        <h2 class="card-title">班级图片 6</h2>
+                        <p class="card-description">暂无描述。</p>
+                    </div>
+                </div>
+            </div>
+                <!-- 更多图片 -->
+                <!-- 定义图表容器 -->
+    <div id="chart-container"></div>
+    <script>
+        // 初始化 echarts 实例
+        var myChart = echarts.init(document.getElementById('chart-container'));
+
+        // 配置图表选项
+        var option = {
+            // 图表标题
+            title: {
+                text: '班级各科目平均成绩柱形图'
+            },
+            // 提示框组件
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            // 图例组件
+            legend: {
+                data: ['平均成绩']
+            },
+            // 网格配置
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            // x 轴配置
+            xAxis: {
+                type: 'category',
+                data: ['语文', '数学', '英语', '物理', '地理', '生物']
+            },
+            // y 轴配置
+            yAxis: {
+                type: 'value'
+            },
+            // 系列数据配置
+            series: [
+                {
+                    name: '平均成绩',
+                    type: 'bar',
+                    data: [83, 95, 60, 80, 82, 84]
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-light mt-5 py-4">
+        <div class="container text-center">
+            <p>&copy; 2025 新城中学15班</p>
+            <p>班主任：廖老师 | 班长：尹梓桐</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 设置中考日期，这里中考日期为 2025 年 6 月 30 日
+        const examDate = new Date('2025-06-30T00:00:00');
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDifference = examDate - now;
+
+            if (timeDifference <= 0) {
+                document.getElementById('countdown').innerHTML = '中考已开始！';
+                return;
+            }
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+        }
+
+        // 初始化倒计时
+        updateCountdown();
+        // 每秒更新一次倒计时
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>

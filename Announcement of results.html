@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>成绩公布页面</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="grades.css">
+    <!-- 引入 Echarts 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">成绩公布系统</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <!-- 在首页按钮添加返回图标 -->
+                        <a class="nav-link" href="#"><i class="fa-solid fa-house"></i> 首页</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="container mt-5">
+        <h1 class="text-center mb-4">成绩公布</h1>
+
+        <!-- 搜索框 -->
+        <div class="mb-4">
+            <input type="text" class="form-control" id="searchInput" placeholder="输入姓名或学号查询成绩">
+        </div>
+
+        <!-- 成绩表格 -->
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>语文</th>
+                    <th>数学</th>
+                    <th>英语</th>
+                    <th>物理</th>
+                    <th>化学</th>
+                    <th>总分</th>
+                    <th>排名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>001</td>
+                    <td>张三</td>
+                    <td>85</td>
+                    <td>90</td>
+                    <td>88</td>
+                    <td>92</td>
+                    <td>86</td>
+                    <td>441</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>李四</td>
+                    <td>78</td>
+                    <td>82</td>
+                    <td>76</td>
+                    <td>80</td>
+                    <td>75</td>
+                    <td>391</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>003</td>
+                    <td>王五</td>
+                    <td>65</td>
+                    <td>70</td>
+                    <td>68</td>
+                    <td>72</td>
+                    <td>66</td>
+                    <td>341</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 成绩图表 -->
+        <div id="chart-container" style="width: 80%; height: 400px; margin: 50px auto;"></div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-light text-center py-3">
+        <p>&copy; 2025 学校名称</p>
+    </footer>
+
+    <!-- 引入 Bootstrap JS -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 初始化 echarts 实例
+        var myChart = echarts.init(document.getElementById('chart-container'));
+
+        // 配置图表选项
+        var option = {
+            title: {
+                text: '各科目平均成绩柱形图'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['平均成绩']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: ['语文', '数学', '英语', '物理', '化学']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name: '平均成绩',
+                    type: 'bar',
+                    data: [80, 85, 82, 83, 81]
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>

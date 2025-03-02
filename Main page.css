@@ -1,0 +1,109 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.class-header {
+    top: 0;
+    left: 0;
+    position: relative;
+    background-color: white;
+    z-index: 100; /* 确保头部在最上层 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 增加头部阴影 */
+}
+
+
+.main-content {
+    margin-top: 80;
+}
+
+.class-news {
+    background: #f9f9f9; /* 调整新闻背景色 */
+    border: 1px solid #d3d3d3; /* 边框宽度为2px，颜色为#333，可根据需求修改 */
+    padding: 20px;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease; /* 增加新闻悬停过渡效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加新闻阴影 */
+}
+
+.class-news:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 鼠标悬停时新闻阴影增大 */
+}
+
+/* 卡片容器样式 */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 30px;
+}
+
+/* 卡片样式 */
+.card {
+    width: 320px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 增加卡片过渡效果 */
+}
+
+/* 鼠标悬停时卡片的效果 */
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* 卡片图片样式 */
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* 卡片内容区域样式 */
+.card-content {
+    padding: 16px;
+}
+
+/* 卡片标题样式 */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* 卡片描述样式 */
+.card-description {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+h3 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* 媒体查询，适配手机屏幕 */
+@media (max-width: 768px) {
+    .main-content {
+        margin-top: 20px; /* 手机屏幕上减小上边距 */
+    }
+
+    .class-news {
+        padding: 10px; /* 手机屏幕上减小内边距 */
+    }
+
+    .card-container {
+        padding: 10px; /* 手机屏幕上减小内边距 */
+        gap: 10px; /* 手机屏幕上减小卡片间距 */
+    }
+
+    #chart-container {
+        width: 100%; /* 图表容器宽度设为100% */
+        height: 300px; /* 手机屏幕上减小图表高度 */
+    }
+}
