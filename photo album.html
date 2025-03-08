@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="./图标.png" type="image/x - icon">
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./Main page.css">
+  <style>
+/* 设置页面整体样式 */
+body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+}
+
+    /* 设置轮播容器样式 */
+.slider {
+      position: relative;
+      width: 900px;
+      height: 550px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      margin-top: 50px;
+}
+
+    /* 设置图片列表样式 */
+.slider-images {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+}
+
+    /* 设置每张图片样式 */
+.slider-images img {
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+}
+
+    /* 设置导航按钮样式 */
+.slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      z-index: 10;
+}
+
+.slider-nav button {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 10px;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+}
+
+.slider-nav button:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* 新增导航头样式 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    margin-right: 20px;
+}
+
+.navbar a:hover {
+    color: #ddd;
+}
+
+.navbar-title {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+</style>
+  <title>Image Slider</title>
+</head>
+
+<body>
+    <!-- 新增导航头 -->
+    <nav class="navbar">
+        <a href="./Main page.html">返回主页<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/>
+        </svg></a>
+        <div class="navbar-title">同学相册</div>
+    </nav>
+  <!-- 轮播容器 -->
+  <div class="slider">
+    <!-- 图片列表 -->
+    <div class="slider-images">
+      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/f22dcb29c03e04a36eecb250fccdbfbb586d4fb43a3376f69545c1d4c99b86f41edd31b6d2da372dd86ab0f1cd99819e?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811210344.jpg&size=750" alt="Slide 1">
+      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/231267555a864ff38b76cb14f78d3124be646b1c37ac929c1fa529da59ccdb0a98cddf84e294dc57512f38678124d710?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811199579.jpg&size=750" alt="Slide 2">
+      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d868ea220930ad157425a7ffaf2c14063e0d13208e382cdd645bf04a963cd8dc144d2dc93541805977cd85f6a3cfbbae?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811025198.jpg&size=750" alt="Slide 3">
+      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/1534a9cfd4ed575023c8b6fed699eabae3e44d1b52f2233b48e14e462ad6b7088e717a0b675a47058977af9fb7bfb994?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740808957422.jpg&size=750" alt="Slide 4">
+      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4597154d71c0a4bd8ebe895167d9ed8c3f6e6af86c1f9663f4ccd1b9373c4387b0ba227abee54d2fe4390bd4f9323483?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347193729.jpg&size=750" alt="Slide 5">
+      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4f1716ec660e091132565ddbbb1f65cd27702d0706a341bc6a2535d2fd4d88e067dddfb155865844abd50b2ef8be7fba?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347231301.jpg&size=750" alt="Slide 6">
+      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d62b9b849a31ce4c6f0d2b7a3408290e394a3f12a475e18e407d6f2b18106229420fcef08a4312e3041418ffd3f0e563?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347216445.jpg&size=750" alt="Slide 7">
+      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/e722c165299de74cf08b8383129b14b4a5c3aaa368f53f4aa36af311fe2981302dec1eca727a4615c0fa87eaed4e83d5?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741405633704.jpg&size=750" alt="Slide 8">
+    </div>
+    <!-- 导航按钮 -->
+    <div class="slider-nav">
+      <button id="prevBtn">&#10094;</button>
+      <button id="nextBtn">&#10095;</button>
+    </div>
+  </div>
+
+  <script>
+    // 获取元素
+    const sliderImages = document.querySelector('.slider-images');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const images = document.querySelectorAll('.slider-images img');
+    let currentIndex = 0;
+
+    // 下一张图片函数
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateSlider();
+    }
+
+    // 上一张图片函数
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateSlider();
+    }
+
+    // 更新轮播函数
+    function updateSlider() {
+      const offset = -currentIndex * 100;
+      sliderImages.style.transform = `translateX(${offset}%)`;
+    }
+
+    // 绑定按钮点击事件
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // 自动播放函数
+    function autoPlay() {
+      nextSlide();
+    }
+
+    // 每 4 秒自动播放一次
+    const intervalId = setInterval(autoPlay, 4000);
+
+    // 鼠标悬停在轮播容器上时停止自动播放
+    const slider = document.querySelector('.slider');
+    slider.addEventListener('mouseenter', () => {
+      clearInterval(intervalId);
+    });
+  </script>
+</body>
+
+</html>
