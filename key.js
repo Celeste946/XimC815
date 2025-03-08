@@ -83,7 +83,7 @@ function validateCredentials() {
             messageElement.textContent = "Login successful";
             messageElement.style.color = "green";
             // 登录成功后跳转到主页
-            window.location.href = 'https://celeste946.github.io/XimC815/Main%20page.html';
+            window.location.href = 'Main page.html';
             // 隐藏元素
             document.addEventListener("DOMContentLoaded", function () {
                 const loginButton = document.querySelector(".nav-link svg");
