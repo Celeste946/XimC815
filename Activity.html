@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>班级活动</title>
+    <link rel="icon" href="./图标.png" type="image/x - icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .sidebar { /* 侧边栏样式 */
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            padding: 17px;
+        }
+        .sidebar h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        .sidebar ul li a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .sidebar ul li a:hover {
+            background-color: #555;
+        }
+        .content {
+            margin-left: 190px; /* 侧边栏宽度 */
+            padding: 20px;     /* 内容区域内边距 */
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+            border-radius: 10px;
+            margin-top: 15px; /* 顶部间距 */;
+        }
+        .activity {
+            margin-bottom: 20px; /* 每个活动之间的间距 */
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .activity h3 {
+            margin-top: 0;
+        }
+        .activity p {
+            margin: 10px 0;
+        }
+        .activity img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>班级活动</h2>
+        <ul>
+            <li><a href="#activity1">活动预览</a></li>
+            <li><a href="./Main page.html">返回首页</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="activity" id="activity1">
+            <h3>学校推荐活动</h3>
+            <img src="./图标.png" alt="学校推荐" width="30" height="30">
+            <p>时间：2025年3月1日-4月1日</p>
+            <p>地点：学校</p>
+            <p>内容：说说自己理想学校，了解怎么样？</p>
+        </div>
+    </div>
+</body>
+</html>

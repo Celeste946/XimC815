@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Today</title>
+    <link rel="icon" href="./图标.png" type="image/x - icon">
+    <style>
+        button {
+            background-color: rgb(62, 155, 241);
+            border-radius: 5px;
+            height: 40px;
+            width: 200px;
+            border: 1px solid #ccc;
+            justify-content: center;
+            align-items: center;
+            left: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* 新增样式，让按钮容器使用 Flexbox 布局 */
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 可以根据需要设置高度，确保垂直居中 */
+            height: 50px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>历史上的今天</h1>
+    <ul id="historyList"></ul>
+    <div><button id="getHistoryToday" onclick="getHistoryToday()">获取历史事件</button></div>
+    <script>
+        function getHistoryToday() {
+    fetch('http://res.abeim.cn/api-history_today')
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 200) {
+                const events = data.data;
+                const historyList = document.getElementById('historyList');
+                events.forEach(event => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = event.time + ' - ' + event.data;
+                    historyList.appendChild(listItem);
+                });
+            } else {
+                alert('Failed to fetch history data: ' + data.msg);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching history:', error);
+            alert('An error occurred while fetching history data.');
+        });
+    }
+
+</script>
+</body>
+</html>
