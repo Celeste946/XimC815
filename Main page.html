@@ -297,34 +297,10 @@
   </ol>
 </div>
 
-
-
-<div id="weather"></div>
-<script>
-    // 心知天气 API Key
-    const API_KEY = 'PTcXxVw-DGdr9e5v7';
-    // 要查询的城市
-    const CITY = '广东';
-    // 心知天气 API 地址
-    const API_URL = `https://api.seniverse.com/v3/weather/now.json?key=${API_KEY}&location=${CITY}&language=zh-Hans&unit=c`;
-
-    // 获取天气信息的函数
-    function getWeather() {
-        fetch(API_URL)
-           .then(response => response.json())
-           .then(data => {
-                const weather = data.results[0].now;
-                const weatherElement = document.getElementById('weather');
-                weatherElement.innerHTML = `当前 ${CITY} 的天气是 ${weather.text}，温度为 ${weather.temperature}°C`;
-            })
-           .catch(error => {
-                console.error('获取天气信息时出错:', error);
-            });
-    }
-
-    // 页面加载完成后调用获取天气信息的函数
-    window.onload = getWeather;
-</script>
+<div class="KoHao">
+    <h4>百日誓师口号</h4>
+    <p>初二十五 沉舟拨付 生地佳绩 非我莫属</p>
+</div>
 
 
 <!-- https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js -->

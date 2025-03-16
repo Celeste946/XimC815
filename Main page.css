@@ -214,3 +214,8 @@ input:checked + .slider:before {
     margin-left: auto; /* 左侧间距为自动 */
     margin-right: auto; /* 右侧间距为自动 */
 }
+
+.KoHao {
+    text-align: center;
+    margin-top: 20px;
+}
