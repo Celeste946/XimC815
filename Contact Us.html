@@ -1,62 +1,171 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>关于我们</title>
     <link rel="icon" href="./图标.png" type="image/x - icon">
-    <link rel="stylesheet" href="contact.css">
-    <script src="./api_ip.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        .message {
-            width: 500px;
-            height: 200px;
-            text-align: center;
-            font-size: 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
+    /* 设置视频背景样式 */
+    body {
+        background-image: url("https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/8082ad4892615b975a059a292aca224dd2fd4e411a355f3a02534dae30a38a4e963b251e049b5d4d369e3619bade7b2e?pictype=scale&from=30113&version=3.3.3.3&fname=20241121125444173216488473954.jpg&size=750");
+        background-size: cover; /* 确保视频填充整个页面 */
+        background-repeat: no-repeat; /* 防止视频重复播放 */
+    }
 
-        .sc {
-            width: 500px;
-            height: 30px;
-            margin-top: 20px;
-            border-radius: 5px;
-            text-align: center;
-            margin-top: 10px;
-            background-color: rgb(48, 107, 216);
-            border: 1px solid #ccc;
-            font-size: 15px;
-        }
+    h1  {
+        color: white;
+        text-align: center;
+        align-items: center; /* 垂直居中 */
+        justify-content: center; /* 水平居中 */
+        margin-top: 230px;
+    }
 
-        img {
-            border-radius: 10px;
-        }
-    </style>
+    p {
+        color: white;
+        text-align: center;
+        align-items: center; /* 垂直居中 */
+    }
+
+    .Dai_ma {
+    display: inline-block; /* 使按钮成为内联元素 */
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+    right: 0;
+    margin-left: 37%;
+    margin-top: 50px;
+    height: 55px;
+    width: 140px;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    }
+
+    .Dai_ma svg {
+        margin-right: 10px;
+    }
+
+    .Dai_ma:active {
+        background-color: #0e61bb;
+        transform: scale(0.98);
+    }
+
+    .Dai_ma:hover {
+        background-color: #0056b3;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 添加阴影 */
+        color: #f0f0f0; /* 改变文字颜色 */
+    }
+
+    .Dai_ma1:hover {
+        background-color: #747679;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 添加阴影 */
+        color: #f0f0f0; /* 改变文字颜色 */
+    }
+
+    .Dai_ma1 {
+    display: inline-block; /* 使按钮成为内联元素 */
+    background-color: #656768;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    text-align: center;
+    right: 0;
+    margin-left: 53%;
+    margin-top: -55px;
+    height: 55px;
+    width: 140px;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    }
+
+    .Dai_ma1:active {
+        background-color: #747679;
+        transform: scale(0.98);
+    }
+
+    .Dai_ma1 svg {
+        margin-right: 10px;
+    }
+
+    .code-display {
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    overflow-x: auto;
+    margin-top: 400px;
+}
+
+.code-display pre {
+    margin: 0;
+}
+
+.code-display code {
+    font-family: 'Courier New', Courier, monospace;
+}
+</style>
 </head>
-
 <body>
-    <!-- 导航栏 -->
-    <nav>
-        <ul>
-            <li><a href="Main page.html">返回</a></li>
-        </ul>
-    </nav>
+    <h1>站长：揽月不辞万里</h1>
+    <p>An advanced web engineer with a cumulative learning duration of 4 years.</p>
 
-    <!-- 联系我们部分 -->
-    <section class="contact-section">
-        <h1>关于我们</h1>
-        <div class="contact-info">
-            <p><i class="fa-solid fa-location-dot"></i> 地址：[新城学校]</p>
-            <p><i class="fa-solid fa-phone"></i> 电话：[18926845117]</p>
-            <p><i class="fa-solid fa-envelope"></i> 邮箱：[1990939838@qq.com]</p>
-            <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/b75bd34af0c2dc760244e31cf23482c28ed260267dcd7781db6793ec2f8e0c1da20b744a8ff1be650dcb628d828e5b41?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741184441916.jpg&size=750" alt="" width="200" height="200">
-            <p>By：揽月不辞万里</p>
-        </div>
-    <!-- 引入 Font Awesome 图标库 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <div>
+        <button class="Dai_ma" onclick="llky()">
+            <svg t="1742663639280" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4788" width="30" height="30"><path d="M832 364.8h-147.2s19.2-64 32-179.2c6.4-57.6-38.4-115.2-102.4-121.6h-12.8c-51.2 0-83.2 32-102.4 76.8l-38.4 96c-32 64-57.6 102.4-76.8 115.2-25.6 12.8-121.6 12.8-128 12.8H128c-38.4 0-64 25.6-64 57.6v480c0 32 25.6 57.6 64 57.6h646.4c96 0 121.6-64 134.4-153.6l51.2-307.2c6.4-70.4-6.4-134.4-128-134.4z m-576 537.6H128V422.4h128v480z m640-409.6l-51.2 307.2c-12.8 57.6-12.8 102.4-76.8 102.4H320V422.4c44.8 0 70.4-6.4 89.6-19.2 32-12.8 64-64 108.8-147.2 25.6-64 38.4-96 44.8-102.4 6.4-19.2 19.2-32 44.8-32h6.4c32 0 44.8 32 44.8 51.2-12.8 102.4-32 166.4-32 166.4l-25.6 83.2h243.2c19.2 0 32 0 44.8 12.8 12.8 12.8 6.4 38.4 6.4 57.6z" p-id="4789" fill="#ffffff"></path></svg>
+            支持我们
+        </button>
+
+        <button class="Dai_ma1" onclick="github()">
+            <svg t="1742656629895" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2560" width="30" height="30"><path d="M512 12.64c-282.752 0-512 229.216-512 512 0 226.208 146.72 418.144 350.144 485.824 25.6 4.736 35.008-11.104 35.008-24.64 0-12.192-0.48-52.544-0.704-95.328-142.464 30.976-172.512-60.416-172.512-60.416-23.296-59.168-56.832-74.912-56.832-74.912-46.464-31.776 3.52-31.136 3.52-31.136 51.392 3.616 78.464 52.768 78.464 52.768 45.664 78.272 119.776 55.648 148.992 42.56 4.576-33.088 17.856-55.68 32.512-68.48-113.728-12.928-233.28-56.864-233.28-253.024 0-55.904 20-101.568 52.768-137.44-5.312-12.896-22.848-64.96 4.96-135.488 0 0 43.008-13.76 140.832 52.48 40.832-11.36 84.64-17.024 128.16-17.248 43.488 0.192 87.328 5.888 128.256 17.248 97.728-66.24 140.64-52.48 140.64-52.48 27.872 70.528 10.336 122.592 5.024 135.488 32.832 35.84 52.704 81.536 52.704 137.44 0 196.64-119.776 239.936-233.792 252.64 18.368 15.904 34.72 47.04 34.72 94.816 0 68.512-0.608 123.648-0.608 140.512 0 13.632 9.216 29.6 35.168 24.576 203.328-67.776 349.856-259.616 349.856-485.76 0-282.784-229.248-512-512-512z" fill="#ffffff" p-id="2561"></path></svg>
+            查看文档
+        </button>
+    </div>
+
+    <script>
+        // 加载时获取点赞数量
+        window.onload = function() {
+            const likeCount = localStorage.getItem('likeCount') || 0;
+            console.log('当前点赞数量:', likeCount);
+        }
+    
+        function llky() {
+            // 获取当前点赞数量
+            let likeCount = parseInt(localStorage.getItem('likeCount')) || 0;
+            
+            // 增加点赞数量
+            likeCount++;
+            
+            // 存储更新后的点赞数量
+            localStorage.setItem('likeCount', likeCount);
+            
+            // 使用 SweetAlert2 显示提示
+        Swal.fire({
+            title: '感谢您的支持！',
+            text: '当前总点赞数：' + likeCount,
+            icon: 'success',
+            confirmButtonText: '确定',
+            customClass: {
+                popup: 'custom-swal-popup',
+                confirmButton: 'custom-swal-button'
+            }
+        });
+    }
+
+    function github() {
+        window.location.href = 'https://gitee.com/Harrison_Yutub/xin-c815'; 
+    }
+</script>
 </body>
-
 </html>
+   
+
