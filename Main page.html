@@ -70,8 +70,37 @@
             text-align: center;
         }
     </style>
+
+
 </head>
 <body>
+    <!-- 添加模态框 -->
+<div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="welcomeModalLabel">欢迎来到815班级网站！</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>请选择您当前的浏览设备：</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='https://celeste946.github.io/Mobilde_iphon815/index'">移动端版本</button>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">电脑端</button>
+        </div>
+      </div>
+    </div>
+</div>
+<script>
+    // 页面加载时显示模态框
+    window.onload = function() {
+        const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+        welcomeModal.show();
+    }
+</script>
+
+
     <!-- 导航栏 -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
         <div class="container">
