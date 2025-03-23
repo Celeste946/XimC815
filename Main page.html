@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
     <script src="https://github.com/apache/incubator-echarts/blob/master/dist/echarts.js"></script>
     <script src="./Main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./api_ip.js"></script>
     <script>
         const apiUrl = 'https://api.vvhan.com/api/script/snow';
@@ -61,6 +62,13 @@
             width: 100%;
         }
 
+        #result {
+            text-align: center;
+        }
+
+        h6 {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -79,7 +87,6 @@
                     更多
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="./Activity.html">班级活动</a></li>
                         <li><a class="dropdown-item" href="./history.html">历史上的今天</a></li>
                         <li><a class="dropdown-item" href="./sponsor.html">成为赞助商</a></li>
                     </ul>
@@ -115,6 +122,7 @@
                             <li class="list-group-item">第八周一模生地考试<span id="exam-countdown"></span></li>
                             <li class="list-group-item">第五周大课间评比结束</li>
                             <li class="list-group-item">第十三周二模生地考试</li>
+                            <li class="list-group-item">已完全适配移动端设备具体地址：<a href="https://celeste946.github.io/Mobilde_iphon815/index.html">点击我传送</a></li>
                         </ul>
                     </div>
                 </div>
@@ -330,6 +338,34 @@
     <h4>百日誓师口号</h4>
     <p>追云十五 沉舟破釜 生地佳绩 非我莫属</p>
 </div>
+
+<h6>获取服务器延迟</h6>
+<p id="result">正在测试连接GitHub的延迟...</p>
+<script>
+    // 创建一个XMLHttpRequest对象
+    const xhr = new XMLHttpRequest();
+    // 记录开始时间
+    const startTime = Date.now();
+
+    // 配置请求
+    xhr.open('GET', 'https://api.github.com', true);
+
+    // 当请求状态改变时的回调函数
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // 记录结束时间
+        const endTime = Date.now();
+        // 计算延迟时间
+        const latency = endTime - startTime;
+        // 更新页面显示结果
+        document.getElementById('result').innerHTML = `连接GitHub的延迟为: ${latency} 毫秒`;
+      }
+    };
+
+    // 发送请求
+    xhr.send();
+</script>
+
 
 
 <!-- https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js -->
