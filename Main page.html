@@ -13,25 +13,6 @@
     <script src="./Main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./api_ip.js"></script>
-    <script>
-        const apiUrl = 'https://api.vvhan.com/api/script/snow';
-        fetch(apiUrl)
-           .then(response => {
-                if (!response.ok) {
-                    throw new Error('网络请求失败');
-                }
-                return response.text(); // 因为这个接口可能返回的是脚本内容，所以这里用 text 方法获取
-            })
-           .then(data => {
-                // 在这里可以考虑将获取到的内容作为脚本执行
-                const script = document.createElement('script');
-                script.textContent = data;
-                document.body.appendChild(script);
-            })
-           .catch(error => {
-                console.error('请求过程中出现错误:', error);
-            });
-    </script>
     <style>
     /* 设置图表容器的样式 */
         #chart-container {
@@ -149,9 +130,8 @@
                         <ul class="list-group">
                             <li class="list-group-item">第六周星期四百日誓师顺利结束</li>
                             <li class="list-group-item">第八周一模生地考试<span id="exam-countdown"></span></li>
-                            <li class="list-group-item">第五周大课间评比结束</li>
-                            <li class="list-group-item">第十三周二模生地考试</li>
-                            <li class="list-group-item">已完全适配移动端设备具体地址：<a href="https://celeste946.github.io/Mobilde_iphon815/index.html">点击我传送</a></li>
+                            <li class="list-group-item">第十二周二模生地考试<span id="exam-countdown2"></span></li>
+                            <li class="list-group-item">清明节倒计时<span id="qingming-countdown"></span></li>
                         </ul>
                     </div>
                 </div>
@@ -414,9 +394,47 @@
 
 <script>
     // 设置中考日期，这里中考日期为 2025 年 6 月 30 日
-    const examDate = new Date('2025-06-30T08:30:00');
+    const examDate = new Date('2025-06-30T00:00:00');
     // 设置第八周一模生地考试日期
     const examDate1 = new Date('2025-03-31T08:30:00');
+    // 设置第十二周二模生地考试日期
+    const examDate2 = new Date('2025-05-12T08:30:00');
+    // 设置清明节日期
+    const qingmingDate = new Date('2025-04-04T00:00:00');
+
+    function updateExamCountdown2() {
+        const now = new Date();
+        const timeDifference = examDate2 - now;
+
+        if (timeDifference <= 0) {
+            document.getElementById('exam-countdown2').innerHTML = '第十二周二模生地考试已开始！';
+            return;
+        }
+
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById('exam-countdown2').innerHTML = `还剩：${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+    }
+
+    function updateQingmingCountdown() {
+        const now = new Date();
+        const timeDifference = qingmingDate - now;
+
+        if (timeDifference <= 0) {
+            document.getElementById('qingming-countdown').innerHTML = '清明节已到！';
+            return;
+        }
+
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById('qingming-countdown').innerHTML = `还剩：${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+    }
 
 function updateCountdown() {
         const now = new Date();
@@ -455,9 +473,13 @@ function updateExamCountdown() {
     // 初始化倒计时
     updateCountdown();
     updateExamCountdown();
+    updateExamCountdown2();
+    updateQingmingCountdown();
     // 每秒更新一次倒计时
     setInterval(updateCountdown, 1000);
     setInterval(updateExamCountdown, 1000);
+    setInterval(updateExamCountdown2, 1000);
+    setInterval(updateQingmingCountdown, 1000);
 
     //维护登录按钮
     function NoLogin() {
