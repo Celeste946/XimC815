@@ -1,68 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安全登录</title>
+    <title>Login</title>
     <link rel="icon" href="./图标.png" type="image/x - icon">
-    <script src="./key.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: url('https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/b23baae3a40bc5454922bfc2ad1a2ab2eb7aee0249bc5a8ca706c8aa81d5e76f86f343cca2e79156dda544edc2073d70?pictype=scale&from=30113&version=3.3.3.3&fname=bgimg.png&size=750') no-repeat;
-            background-size: cover; /* 确保背景图像覆盖整个容器 */
-        }
-        .login-container {
-            background: rgba(0, 0, 0, 0.6);	/*rgba设置透明层*/
-            background-color: #00000060;	/*八位颜色位设置透明层*/
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-        }
-        input {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4285f4;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #007bff;
-        }
-        .message {
-            color: red;
-            margin-top: 10px;
-        }
-
-        h2 {
-            color: white;
+            font-family: 'Inter', sans-serif;
         }
     </style>
 </head>
-<body>
-    <div class="login-container">
-        <h2>Login</h2>
+
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-4">Login</h2>
         <form id="loginForm">
-            <input type="text" placeholder="Username" id="username" required>
-            <input type="password" placeholder="Password" id="password" required>
-            <button type="button" class="login-button" onclick="getLoginStatus();validateCredentials()">登录</button>
-            <div class="message" id="message"></div>
+            <div class="mb-4">
+                <label for="loginUsername" class="block text-gray-700 font-bold mb-2">Username:</label>
+                <input type="text" id="loginUsername" class="border border-gray-300 p-2 w-full rounded" required>
+            </div>
+            <div class="mb-4">
+                <label for="loginPassword" class="block text-gray-700 font-bold mb-2">Password:</label>
+                <input type="password" id="loginPassword" class="border border-gray-300 p-2 w-full rounded" required>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Login</button>
         </form>
+        <div id="message" class="mt-4 text-red-500"></div>
+        <a href="./Main page.html" class="text-blue-500 block mt-2">Back to Home</a>
+        <a href="./register.html" class="text-blue-500 block mt-2">Don't have an account?</a>
     </div>
+
+    <script>
+        const request = indexedDB.open('userDB', 1);
+        let db;
+
+        request.onupgradeneeded = function (event) {
+            db = event.target.result;
+            const objectStore = db.createObjectStore('users', { keyPath: 'username' });
+            objectStore.createIndex('password', 'password', { unique: false });
+        };
+
+        request.onsuccess = function (event) {
+            db = event.target.result;
+        };
+
+        request.onerror = function (event) {
+            console.error('Database error: ' + event.target.errorCode);
+        };
+
+        const loginForm = document.getElementById('loginForm');
+        const messageDiv = document.getElementById('message');
+
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const transaction = db.transaction(['users'], 'readonly');
+            const objectStore = transaction.objectStore('users');
+            const getUser = objectStore.get(username);
+
+            getUser.onsuccess = function (event) {
+                const user = event.target.result;
+                if (user && user.password === password) {
+                    messageDiv.textContent = 'Login successful!';
+                } else {
+                    messageDiv.textContent = 'Invalid username or password.';
+                }
+            };
+
+            getUser.onerror = function (event) {
+                console.error('Error getting user: ' + event.target.errorCode);
+            };
+        });
+    </script>
 </body>
+
 </html>
+    

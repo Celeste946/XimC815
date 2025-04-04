@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI对话</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* 固定导航栏 */
+        nav {
+            background-color: #3b82f6;
+            padding: 16px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container { /* 调整导航栏容器样式 */
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 16px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #e5e7eb;
+        }
+
+        .chat-wrapper {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            width: 80%; /* 增加宽度 */
+            max-width: 800px; /* 增加最大宽度 */
+            overflow: hidden;
+            margin: 80px auto auto;
+            /* 增加顶部外边距，避免被导航栏遮挡 */
+        }
+
+        .chat-header {
+            background-color: #3b82f6;
+            color: white;
+            padding: 16px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .chat-container {
+            max-height: 600px; /* 增加最大高度 */
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-container::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        .chat-container::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        .user-message,
+        .bot-message {
+            display: flex;
+            margin-bottom: 12px;
+        }
+
+        .user-message {
+            justify-content: flex-end;
+        }
+
+        .bot-message {
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            padding: 12px 16px;
+            border-radius: 16px;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .user-message .message-content {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .bot-message .message-content {
+            background-color: #e5e7eb;
+            color: #333;
+        }
+
+        .input-area {
+            display: flex;
+            padding: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        #user-input {
+            flex: 1;
+            border: none;
+            border-radius: 20px;
+            background-color: #e5e7eb;
+            padding: 12px 16px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #send-button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        #send-button:hover {
+            background-color: #2563eb;
+        }
+
+        /* 直接显示的API选择样式 */
+        .api-display {
+            display: flex;
+            justify-content: center;
+            padding: 8px;
+            background-color: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .api-display-option {
+            padding: 8px 16px;
+            margin: 0 4px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .api-display-option:hover {
+            background-color: #e5e7eb;
+        }
+
+        .api-display-option.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        /* 思考动画样式 */
+        .thinking-animation {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .thinking-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #888;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .thinking-dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .thinking-dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* 清空聊天记录按钮样式 */
+        #clear-chat-button {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            margin: 16px auto;
+            display: block;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #clear-chat-button:hover {
+            background-color: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container">
+            <a href="#" class="text-white text-xl font-bold">在线AI对话</a>
+            <ul>
+                <li><a href="./about.html" class="text-white hover:text-gray-200">关于</a></li>
+                <li><a href="./Main page.html" class="text-white hover:text-gray-200">返回</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="chat-wrapper">
+        <div class="chat-header">AI对话</div>
+        <!-- 直接显示API选项 -->
+        <div class="api-display">
+            <span class="api-display-option active" data-api="yiyan">豆包API</span>
+            <span class="api-display-option" data-api="glm">GLM API</span>
+            <span class="api-display-option" data-api="ernie">AI · Chat ERNIE</span>
+        </div>
+        <div class="chat-container">
+            <div id="chat-messages" class="space-y-2">
+            </div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="输入你的问题">
+            <button id="send-button">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+        <button id="clear-chat-button">清空聊天记录</button>
+    </div>
+    <script>
+        const chatMessages = document.getElementById('chat-messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+        const apiOptions = document.querySelectorAll('.api-display-option');
+        const clearChatButton = document.getElementById('clear-chat-button');
+        let selectedApi = 'yiyan';
+
+        apiOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                apiOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                selectedApi = option.dataset.api;
+            });
+        });
+
+        // 页面加载完成后，AI 发送欢迎消息
+        window.addEventListener('load', () => {
+            const welcomeMessage = '您好！请问今天怎么帮助你？';
+            const aiMessageDiv = document.createElement('div');
+            aiMessageDiv.classList.add('bot-message');
+            const aiMessageContent = document.createElement('div');
+            aiMessageContent.classList.add('message-content');
+            const aiText = document.createElement('span');
+            aiText.textContent = welcomeMessage;
+            aiMessageContent.appendChild(aiText);
+            aiMessageDiv.appendChild(aiMessageContent);
+            chatMessages.appendChild(aiMessageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+
+        // 发送消息函数
+        const sendMessage = async () => {
+            const message = userInput.value.trim();
+            if (message === '') return;
+
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.classList.add('user-message');
+            const userMessageContent = document.createElement('div');
+            userMessageContent.classList.add('message-content');
+            const userText = document.createElement('span');
+            userText.textContent = message;
+            userMessageContent.appendChild(userText);
+            userMessageDiv.appendChild(userMessageContent);
+            chatMessages.appendChild(userMessageDiv);
+
+            userInput.value = '';
+
+            // 显示思考动画
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.classList.add('thinking-animation');
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('thinking-dot');
+                thinkingDiv.appendChild(dot);
+            }
+            chatMessages.appendChild(thinkingDiv);
+
+            let apiUrl;
+            if (selectedApi === 'ernie') {
+                apiUrl = `https://api.52vmy.cn/api/chat/${selectedApi}?msg=${encodeURIComponent(message)}&type=JSON`;
+            } else {
+                apiUrl = `https://api.52vmy.cn/api/chat/${selectedApi}?msg=${encodeURIComponent(message)}`;
+            }
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`请求失败，状态码：${response.status}`);
+                }
+                const data = await response.json();
+                let aiAnswer;
+                if (selectedApi === 'yiyan') {
+                    aiAnswer = data.data ? data.data.answer : data.answer;
+                } else if (selectedApi === 'glm') {
+                    aiAnswer = data.data ? data.data.answer : data.answer;
+                } else if (selectedApi === 'ernie') {
+                    aiAnswer = data.data ? data.data.answer : data.answer;
+                }
+
+                // 移除思考动画
+                chatMessages.removeChild(thinkingDiv);
+
+                const aiMessageDiv = document.createElement('div');
+                aiMessageDiv.classList.add('bot-message');
+                const aiMessageContent = document.createElement('div');
+                aiMessageContent.classList.add('message-content');
+                const aiText = document.createElement('span');
+                aiText.textContent = aiAnswer;
+                aiMessageContent.appendChild(aiText);
+                aiMessageDiv.appendChild(aiMessageContent);
+                chatMessages.appendChild(aiMessageDiv);
+
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } catch (error) {
+                console.error('请求出错:', error);
+                // 移除思考动画
+                chatMessages.removeChild(thinkingDiv);
+
+                const errorMessageDiv = document.createElement('div');
+                errorMessageDiv.classList.add('bot-message');
+                const errorMessageContent = document.createElement('div');
+                errorMessageContent.classList.add('message-content');
+                const errorText = document.createElement('span');
+                errorText.textContent = `请求出错: ${error.message}，请稍后重试`;
+                errorMessageContent.appendChild(errorText);
+                errorMessageDiv.appendChild(errorMessageContent);
+                chatMessages.appendChild(errorMessageDiv);
+
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        };
+
+        sendButton.addEventListener('click', sendMessage);
+
+        // 按下回车键发送消息
+        userInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // 清空聊天记录
+        clearChatButton.addEventListener('click', () => {
+            chatMessages.innerHTML = '';
+        });
+    </script>
+</body>
+
+</html>
