@@ -16,6 +16,16 @@
 </head>
 
 <body class="bg-gray-100 flex justify-center items-center min-h-screen">
+
+    <script>
+        // 检查登录状态
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (!isLoggedIn || isLoggedIn === 'true') {
+            alert('你已经登录了，请不要重复登录！');
+            window.location.href = './Main page.html';
+        }
+    </script>
+
     <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h2 class="text-2xl font-bold mb-4">Login</h2>
         <form id="loginForm">
@@ -67,7 +77,12 @@
             getUser.onsuccess = function (event) {
                 const user = event.target.result;
                 if (user && user.password === password) {
-                    messageDiv.textContent = 'Login successful!';
+                    messageDiv.textContent = 'Login Yes!';
+                    // 存储登录状态
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('username', username);
+                    // 添加页面跳转
+                    window.location.href = './Main page.html';
                 } else {
                     messageDiv.textContent = 'Invalid username or password.';
                 }

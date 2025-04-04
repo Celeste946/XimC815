@@ -55,6 +55,13 @@
 
 </head>
 <body>
+    <script>
+        // 检查登录状态
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (!isLoggedIn || isLoggedIn !== 'true') {
+            logoutBtn.style.display = 'none';
+        }
+    </script>
     <!-- 添加模态框 -->
 <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -95,11 +102,23 @@
                     <!-- 新增下拉菜单 -->
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    更多
+                        更多
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="./history.html">历史上的今天</a></li>
                         <li><a class="dropdown-item" href="./sponsor.html">成为赞助商</a></li>
+                        <li><a class="dropdown-item" id="logoutBtn" onclick="Tuic()">退出登录</a></li>
+                        <script>
+                            function Tuic() {
+                                // 退出状态
+                                const isLoggedIn = localStorage.getItem('isLoggedIn');
+                                    if (!isLoggedIn || isLoggedIn === 'true') {
+                                    localStorage.setItem('isLoggedIn', 'false');
+                                    alert('您已退出登录');
+                                    logoutBtn.style.display = 'none';
+                                }
+                            }
+                        </script>
                     </ul>
                 </ul>
                 <!-- 倒计时显示 -->
@@ -129,7 +148,7 @@
                     <div class="class-news">
                         <h4>最新公告</h4>
                         <ul class="list-group">
-                            <li class="list-group-item">第六周星期四百日誓师顺利结束</li>
+                            <li class="list-group-item">第十周期中考试</li>
                             <li class="list-group-item">第八周一模生地考试<span id="exam-countdown"></span></li>
                             <li class="list-group-item">第十二周二模生地考试<span id="exam-countdown2"></span></li>
                             <li class="list-group-item">清明节倒计时<span id="qingming-countdown"></span></li>
@@ -151,127 +170,42 @@
         </section>
 
         <!-- 班级相册 -->
-        <section id="gallery" class="mt-5">
-            <h3>班级相册</h3>
-            <div class="card-container">
-                <!-- 第一张卡片 -->
-                <div class="card">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/f22dcb29c03e04a36eecb250fccdbfbb586d4fb43a3376f69545c1d4c99b86f41edd31b6d2da372dd86ab0f1cd99819e?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811210344.jpg&size=750" alt="示例图片 1">
-                    <div class="card-content">
-                        <h2 class="card-title">班级图片 1</h2>
-                        <p class="card-description">暂无描述。</p>
-                    </div>
+        <section id="gallery" class="mt-4">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="photos-tab" data-bs-toggle="tab" data-bs-target="#photos" type="button"
+                        role="tab" aria-controls="photos" aria-selected="true">图片</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="videos-tab" data-bs-toggle="tab" data-bs-target="#videos" type="button"
+                        role="tab" aria-controls="videos" aria-selected="false">视频</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="photos" role="tabpanel" aria-labelledby="photos-tab">
+                    <!-- 图片内容 -->
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/f22dcb29c03e04a36eecb250fccdbfbb586d4fb43a3376f69545c1d4c99b86f41edd31b6d2da372dd86ab0f1cd99819e?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811210344.jpg&size=750" class="img-fluid m-2" alt="班级图片1">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/231267555a864ff38b76cb14f78d3124be646b1c37ac929c1fa529da59ccdb0a98cddf84e294dc57512f38678124d710?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811199579.jpg&size=750" class="img-fluid m-2" alt="班级图片2">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d868ea220930ad157425a7ffaf2c14063e0d13208e382cdd645bf04a963cd8dc144d2dc93541805977cd85f6a3cfbbae?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811025198.jpg&size=750" class="img-fluid m-2" alt="班级图片3">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/1534a9cfd4ed575023c8b6fed699eabae3e44d1b52f2233b48e14e462ad6b7088e717a0b675a47058977af9fb7bfb994?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740808957422.jpg&size=750" class="img-fluid m-2" alt="班级图片4">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4597154d71c0a4bd8ebe895167d9ed8c3f6e6af86c1f9663f4ccd1b9373c4387b0ba227abee54d2fe4390bd4f9323483?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347193729.jpg&size=750" class="img-fluid m-2" alt="班级图片5">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4f1716ec660e091132565ddbbb1f65cd27702d0706a341bc6a2535d2fd4d88e067dddfb155865844abd50b2ef8be7fba?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347231301.jpg&size=750" class="img-fluid m-2" alt="班级图片6">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d62b9b849a31ce4c6f0d2b7a3408290e394a3f12a475e18e407d6f2b18106229420fcef08a4312e3041418ffd3f0e563?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347216445.jpg&size=750" class="img-fluid m-2" alt="班级图片7">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d868ea220930ad157425a7ffaf2c14063e0d13208e382cdd645bf04a963cd8dc144d2dc93541805977cd85f6a3cfbbae?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811025198.jpg&size=750" class="img-fluid m-2" alt="班级图片8">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/cb15ea95b4c446923bf0ca4feaa1af4e1e1e8bd923c33d064d3d882841b3d878feffc564c78a9d640515d20789897094?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741430248213.jpg&size=750" class="img-fluid m-2" alt="班级图片9">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/f0649c2fe588749fe8c6abd88fdb7b0897201621152bd4c9df8f4f86d69b5df49d162c309c7b619e48a1f34f67b5bce7?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347208411.jpg&size=750" class="img-fluid m-2" alt="班级图片10">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/ac4d50fe451f1b9324ab6dbb861a592acc2b2d54161a52c99375f7126e9f1192a202214cd4444616a94faff092e1d27d?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741792491098.jpg&size=750" class="img-fluid m-2" alt="班级图片11">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/a1f92109ee064bef87bbed6eca46cc57edba5b9c7fb800b42e305812b15159415e01c45040db1f74f14fbe787f893d70?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1742558687404.jpg&size=750" class="img-fluid m-2" alt="班级图片12">
                 </div>
-                <!-- 第二张卡片 -->
-                <div class="card">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/231267555a864ff38b76cb14f78d3124be646b1c37ac929c1fa529da59ccdb0a98cddf84e294dc57512f38678124d710?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811199579.jpg&size=750" alt="示例图片 2">
-                    <div class="card-content">
-                        <h2 class="card-title">班级图片 2</h2>
-                        <p class="card-description">暂无描述。</p>
-                    </div>
-                </div>
-                <!-- 第三张卡片 -->
-                <div class="card">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d868ea220930ad157425a7ffaf2c14063e0d13208e382cdd645bf04a963cd8dc144d2dc93541805977cd85f6a3cfbbae?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811025198.jpg&size=750" alt="示例图片 3">
-                    <div class="card-content">
-                        <h2 class="card-title">班级图片 3</h2>
-                        <p class="card-description">暂无描述。</p>
-                    </div>
-                </div>
-                <!-- 第四张卡片 -->
-                <div class="card">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/1534a9cfd4ed575023c8b6fed699eabae3e44d1b52f2233b48e14e462ad6b7088e717a0b675a47058977af9fb7bfb994?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740808957422.jpg&size=750" alt="示例图片 4">
-                    <div class="card-content">
-                        <h2 class="card-title">班级图片 4</h2>
-                        <p class="card-description">暂无描述。</p>
-                    </div>
-                </div>
-                <!-- 第五张卡片 -->
-                <div class="card">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4597154d71c0a4bd8ebe895167d9ed8c3f6e6af86c1f9663f4ccd1b9373c4387b0ba227abee54d2fe4390bd4f9323483?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347193729.jpg&size=750" alt="示例图片 5">
-                    <div class="card-content">
-                        <h2 class="card-title">班级图片 5</h2>
-                        <p class="card-description">暂无描述。</p>
-                    </div>
-                </div>
-                <!-- 第六张卡片 -->
-                <div class="card">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4f1716ec660e091132565ddbbb1f65cd27702d0706a341bc6a2535d2fd4d88e067dddfb155865844abd50b2ef8be7fba?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347231301.jpg&size=750" alt="示例图片 6">
-                    <div class="card-content">
-                        <h2 class="card-title">班级图片 6</h2>
-                        <p class="card-description">暂无描述。</p>
-                    </div>
-                </div>
-                <!-- 第七张卡片 -->
-                <div class="card1">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d62b9b849a31ce4c6f0d2b7a3408290e394a3f12a475e18e407d6f2b18106229420fcef08a4312e3041418ffd3f0e563?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347216445.jpg&size=750" alt="示例图片 7">
-                    <div class="card1-content">
-                        <h2 class="card1-title">班级图片 7</h2>
-                        <p class="card1-description">暂无描述。</p>
-                    </div>
-                </div>
-                <!-- 第八张卡片 -->
-                <div class="card">
-                    <video controls>
+                <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+                    <!-- 视频内容 -->
+                    <video width="320" height="240" controls>
                         <source src="./mmexport1742579663250.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
+                        您的浏览器不支持视频播放。
                     </video>
-                    <div class="card-content">
-                        <h2 class="card-title">班级视频 8</h2>
-                        <p class="card-description">生地中考加油。视频源自@陈曼熙</p>
-                    </div>
                 </div>
-                <!-- 第九张卡片 -->
-                <div class="card1">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/cb15ea95b4c446923bf0ca4feaa1af4e1e1e8bd923c33d064d3d882841b3d878feffc564c78a9d640515d20789897094?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741430248213.jpg&size=750" alt="示例图片 9">
-                    <div class="card1-content">
-                        <h2 class="card1-title">班级图片 9</h2>
-                        <p class="card1-description">暂无描述。</p>
-                        <!-- 添加按钮 -->
-                        <button id="toggle-more-images" onclick="toggleMoreImages()">查看更多图片</button>
-                    </div>
-                </div>
-                <!-- 隐藏的更多图片 -->
-                <div id="more-images" style="display: none;">
-                <!-- 这里可以添加更多图片 -->
-                <div class="card">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/f0649c2fe588749fe8c6abd88fdb7b0897201621152bd4c9df8f4f86d69b5df49d162c309c7b619e48a1f34f67b5bce7?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347208411.jpg&size=750" alt="更多图片 1">
-                    <div class="card-content">
-                        <h2 class="card-title">班级图片 10</h2>
-                        <p class="card-description">暂无描述。</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/ac4d50fe451f1b9324ab6dbb861a592acc2b2d54161a52c99375f7126e9f1192a202214cd4444616a94faff092e1d27d?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741792491098.jpg&size=750" alt="更多图片 2">
-                    <div class="card-content">
-                        <h2 class="card-title">班级图片 11</h2>
-                        <p class="card-description">暂无描述。</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/a1f92109ee064bef87bbed6eca46cc57edba5b9c7fb800b42e305812b15159415e01c45040db1f74f14fbe787f893d70?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1742558687404.jpg&size=750" alt="更多图片 3">
-                    <div class="card-content">
-                        <h2 class="card-title">同学图片 12</h2>
-                        <p class="card-description">这个逆天47号。</p>
-                    </div>
-                </div>
-                <script>
-                    function toggleMoreImages() {
-                    // 获取更多图片的容器元素
-                    const moreImages = document.getElementById('more-images');
-                    // 获取查看更多图片的按钮元素
-                    const button = document.getElementById('toggle-more-images');
-                    if (moreImages.style.display === 'none') {
-                        // 若更多图片隐藏，则显示
-                        moreImages.style.display = 'block';
-                        button.textContent = '收起更多图片';
-                    } else {
-                        // 若更多图片显示，则隐藏
-                        moreImages.style.display = 'none';
-                        button.textContent = '查看更多图片';
-        }
-    }
-</script>
+            </div>
+        </section>
     <!-- 可以继续添加更多图片 -->
 </div>
             </div>

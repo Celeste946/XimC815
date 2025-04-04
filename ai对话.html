@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI对话</title>
+    <link rel="icon" href="./图标.png" type="image/x - icon">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <style>
@@ -256,12 +257,21 @@
 </head>
 
 <body>
+    <script>
+        // 检查登录状态
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (!isLoggedIn || isLoggedIn !== 'true') {
+            alert('请先登录！');
+            window.location.href = './login.html';
+        }
+    </script>
+
     <!-- 导航栏 -->
     <nav>
         <div class="container">
             <a href="#" class="text-white text-xl font-bold">在线AI对话</a>
             <ul>
-                <li><a href="./about.html" class="text-white hover:text-gray-200">关于</a></li>
+                <li><a href="./about.html" class="text-white hover:text-gray-200">问题</a></li>
                 <li><a href="./Main page.html" class="text-white hover:text-gray-200">返回</a></li>
             </ul>
         </div>
@@ -274,6 +284,7 @@
             <span class="api-display-option active" data-api="yiyan">豆包API</span>
             <span class="api-display-option" data-api="glm">GLM API</span>
             <span class="api-display-option" data-api="ernie">AI · Chat ERNIE</span>
+            <span class="api-display-option" data-api="deepseek">DeepSeek</span>
         </div>
         <div class="chat-container">
             <div id="chat-messages" class="space-y-2">
@@ -294,6 +305,7 @@
         const apiOptions = document.querySelectorAll('.api-display-option');
         const clearChatButton = document.getElementById('clear-chat-button');
         let selectedApi = 'yiyan';
+        const deepSeekApiKey = 'sk-31fb2577b51a4e109a35eafd326b3f2e';
 
         apiOptions.forEach(option => {
             option.addEventListener('click', () => {
@@ -346,14 +358,36 @@
             chatMessages.appendChild(thinkingDiv);
 
             let apiUrl;
+            let requestOptions;
             if (selectedApi === 'ernie') {
                 apiUrl = `https://api.52vmy.cn/api/chat/${selectedApi}?msg=${encodeURIComponent(message)}&type=JSON`;
+            } else if (selectedApi === 'deepseek') {
+                apiUrl = 'https://api.deepseek.com/v1/chat/completions';
+                requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${deepSeekApiKey}`
+                    },
+                    body: JSON.stringify({
+                        messages: [
+                            { role: "system", content: "You are a helpful assistant." },
+                            { role: "user", content: message }
+                        ],
+                        model: "deepseek-chat"
+                    })
+                };
             } else {
                 apiUrl = `https://api.52vmy.cn/api/chat/${selectedApi}?msg=${encodeURIComponent(message)}`;
             }
 
             try {
-                const response = await fetch(apiUrl);
+                let response;
+                if (selectedApi === 'deepseek') {
+                    response = await fetch(apiUrl, requestOptions);
+                } else {
+                    response = await fetch(apiUrl);
+                }
                 if (!response.ok) {
                     throw new Error(`请求失败，状态码：${response.status}`);
                 }
@@ -365,6 +399,8 @@
                     aiAnswer = data.data ? data.data.answer : data.answer;
                 } else if (selectedApi === 'ernie') {
                     aiAnswer = data.data ? data.data.answer : data.answer;
+                } else if (selectedApi === 'deepseek') {
+                    aiAnswer = data.choices[0].message.content;
                 }
 
                 // 移除思考动画
@@ -390,8 +426,14 @@
                 errorMessageDiv.classList.add('bot-message');
                 const errorMessageContent = document.createElement('div');
                 errorMessageContent.classList.add('message-content');
-                const errorText = document.createElement('span');
-                errorText.textContent = `请求出错: ${error.message}，请稍后重试`;
+                let errorText;
+                if (error.message.includes('402')) {
+                    errorText = document.createElement('span');
+                    errorText.textContent = '请求失败，此 API 需要付费使用，请检查您的账户余额或联系管理员。';
+                } else {
+                    errorText = document.createElement('span');
+                    errorText.textContent = `请求出错: ${error.message}`;
+                }
                 errorMessageContent.appendChild(errorText);
                 errorMessageDiv.appendChild(errorMessageContent);
                 chatMessages.appendChild(errorMessageDiv);
@@ -401,15 +443,12 @@
         };
 
         sendButton.addEventListener('click', sendMessage);
-
-        // 按下回车键发送消息
         userInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 sendMessage();
             }
         });
 
-        // 清空聊天记录
         clearChatButton.addEventListener('click', () => {
             chatMessages.innerHTML = '';
         });

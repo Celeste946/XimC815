@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>关于AI</title>
+    <title>问题文档</title>
+    <link rel="icon" href="./图标.png" type="image/x - icon">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -61,9 +62,40 @@
 
         .zhuY {
             max-width: 800px;
-            margin: 100px auto 20px; /* 调整顶部和底部间距 */
+            margin: 100px 20px 20px 40px; /* 调整顶部和底部间距 */
             padding: 20px;
         }
+
+        /* 添加选项卡样式 */
+    .tabs {
+        margin-top: 20px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        gap: 10px;
+    }
+    
+    .tab { /* 调整选项卡样式 */
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px 4px 0 0;
+        transition: all 0.3s ease;
+    }
+    
+    .tab.active {
+        background-color: #3b82f6;
+        color: white;
+    }
+    
+    .tab-content { /* 调整内容样式 */
+        display: none;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-top: none;
+    }
+    
+    .tab-content.active {
+        display: block;
+    }
     </style>
 </head>
 <body>
@@ -79,8 +111,47 @@
     <!-- 主要内容 -->
     <div class="zhuY">
         <h1>注意事项</h1>
-        <p>1.不要过快的发出问题请求，否则会被Ban掉IP地址</p>
+        <p>1.请勿过快的发出问题请求，否则会被Ban掉IP地址</p>
         <p>2.已接入豆包AI · GLM AI · Chat ERNIE</p>
     </div>
+
+    <!-- 添加选项卡 -->
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab(1)">豆包API</div>
+        <div class="tab" onclick="switchTab(2)">GLM API</div>
+        <div class="tab" onclick="switchTab(3)">AI · Chat ERNIE</div>
+        <div class="tab" onclick="switchTab(4)">DeepSeek</div>
+
+    </div>
+    
+    <div class="tab-content active">
+        <p>特点：简单易用，开发者无论经验水平如何，都能快速上手。提供丰富文档和示例代码，助力开发者理解与使用功能。涵盖领域广，如数据分析、人工智能、物联网等，功能丰富，可按需定制。采用按需付费模式，只按实际调用次数和数据传输量等收费。</p>
+    </div>
+    <div class="tab-content">
+        <p>特点：智谱 GLM-Realtime API 支持多模态与端到端模型，可处理语音、文本和图像的输入与输出。内置优化后的实时通信能力，交互低延时且可打断。集成全球主流 STT、LLM 和 TTS 等插件，方便灵活编排与快速开发。支持 C++，Go，Python，Node.JS 等主流语言，Agent 可跨平台无缝衔接。</p>
+    </div>
+    <div class="tab-content">
+        <p>特点：专注于中文自然语言处理，在中文语境下的文本生成和理解能力强大。融合百度海量数据优势，借助百度的搜索引擎和内容生态，信息检索能力强，能很好地整合互联网上的中文信息。</p>
+    </div>
+    <div class="tab-content">
+        <p>问题：请求失败，此 API 需要付费使用，请检查您的账户余额或联系管理员。</p>
+        <p>原因方式：因后台未及时续费，导致无法调用请求/成本高需付费</p>
+    </div>
+
+    <script>
+        function switchTab(tabIndex) {
+            // 移除所有选项卡的active类
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // 移除所有内容的active类
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // 添加active类到选中的选项卡和内容
+            tabs[tabIndex - 1].classList.add('active');
+            contents[tabIndex - 1].classList.add('active');
+        }
+    </script>
 </body>
 </html>

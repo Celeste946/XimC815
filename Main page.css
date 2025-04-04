@@ -266,3 +266,21 @@ input:checked + .slider:before {
 .card1:hover {
     transform: translateY(-5px);
 }
+
+.tab-content img { /* 图片样式 */
+    max-width: 30%;
+    width: auto;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.tab-content video { /* 视频样式 */
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.tab-content { /* 内容区域样式 */
+    margin-top: 5px;
+}
