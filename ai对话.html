@@ -263,6 +263,8 @@
         if (!isLoggedIn || isLoggedIn !== 'true') {
             alert('请先登录！');
             window.location.href = './login.html';
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.setItem('username', username);
         }
     </script>
 

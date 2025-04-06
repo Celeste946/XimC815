@@ -59,51 +59,56 @@
             const username = document.getElementById('registerUsername').value;
             const password = document.getElementById('registerPassword').value;
 
-            const transaction = db.transaction(['users'], 'readwrite');
+            const transaction = db.transaction(['users'], 'readonly');
             const objectStore = transaction.objectStore('users');
-            const addUser = objectStore.add({ username: username, password: password });
+            const getUser = objectStore.get(username);
 
-            addUser.onsuccess = function (event) {
-                messageDiv.textContent = 'Registration successful!';
-                // 存储登录状态
-                localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('username', username);
-
-                //发送邮箱
-                fetch('http://localhost:3000/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        username: username,
-                        password: password,
-                        email: '1990939838@qq.com'
-                    })
-                })
-                .then(response => response.text())
-                .then(data => {
-                        console.log(data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    window.location.href = './login.html';
-                })
-
-                // 添加页面跳转
-                window.location.href = './login.html';
-            };
-
-            addUser.onerror = function (event) {
-                if (event.target.error.name === 'ConstraintError') {
+            getUser.onsuccess = function (event) {
+                if (event.target.result) {
                     messageDiv.textContent = 'Username already exists.';
                 } else {
-                    console.error('Error adding user: ' + event.target.errorCode);
+                    const addTransaction = db.transaction(['users'], 'readwrite');
+                    const addObjectStore = addTransaction.objectStore('users');
+                    const addUser = addObjectStore.add({ username: username, password: password });
+
+                    addUser.onsuccess = function (event) {
+                        messageDiv.textContent = 'Registration successful!';
+                        // 存储登录状态
+                        localStorage.setItem('isLoggedIn', 'true');
+                        localStorage.setItem('username', username);
+
+                        // 模拟发送邮件
+                        fetch('https://example.com/send-email', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                text: "一个新用户注册了" + username,
+                                to: "1990939838@qq.com",
+                                subject: "新用户注册通知"
+                            })
+                        })
+                       .then(response => response.json())
+                       .then(data => console.log(data))
+                       .catch(error => console.error('Error sending email:', error));
+
+                        // 添加页面跳转
+                        window.location.href = './login.html';
+                    };
+
+                    addUser.onerror = function (event) {
+                        console.error('Error adding user: ' + event.target.errorCode);
+                    };
                 }
             };
+
+            getUser.onerror = function (event) {
+                console.error('Error getting user: ' + event.target.errorCode);
+            };
         });
+
     </script>
 </body>
 
 </html>
-    
