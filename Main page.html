@@ -10,7 +10,6 @@
     <!-- 引入 Echarts 库 -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
     <script src="https://github.com/apache/incubator-echarts/blob/master/dist/echarts.js"></script>
-    <script src="./Main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
     <script src="./api_ip.js"></script>
     <style>
@@ -177,10 +176,10 @@
                     <div class="class-news">
                         <h4>最新公告</h4>
                         <ul class="list-group">
-                            <li class="list-group-item">第十周期中考试</li>
+                            <li class="list-group-item">第十周期中考试<span id="midterm-countdown"></span> </li>
                             <li class="list-group-item">第八周一模生地考试<span id="exam-countdown"></span></li>
                             <li class="list-group-item">第十二周二模生地考试<span id="exam-countdown2"></span></li>
-                            <li class="list-group-item">清明节倒计时<span id="qingming-countdown"></span></li>
+                            <li class="list-group-item">五一劳动节倒计时<span id="qingming-countdown"></span></li>
                         </ul>
                     </div>
                 </div>
@@ -364,7 +363,9 @@
     // 设置第十二周二模生地考试日期
     const examDate2 = new Date('2025-05-12T08:30:00');
     // 设置清明节日期
-    const qingmingDate = new Date('2025-04-04T00:00:00');
+    const qingmingDate = new Date('2025-05-01T00:00:00');
+    // 设置第十周期中考试日期
+    const midtermDate = new Date('2025-04-15T07:00:00');
 
     function updateExamCountdown2() {
         const now = new Date();
@@ -388,7 +389,7 @@
         const timeDifference = qingmingDate - now;
 
         if (timeDifference <= 0) {
-            document.getElementById('qingming-countdown').innerHTML = '清明节已到！';
+            document.getElementById('qingming-countdown').innerHTML = '五一劳动节已到！';
             return;
         }
 
@@ -434,16 +435,35 @@ function updateExamCountdown() {
     document.getElementById('exam-countdown').innerHTML = `还剩：${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
 }
 
+function updateMidtermCountdown() {
+        const now = new Date();
+        const timeDifference = midtermDate - now;
+
+        if (timeDifference <= 0) {
+            document.getElementById('exam-countdown').innerHTML = '第十周期中考试已开始！';
+            return;
+        }
+
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById('midterm-countdown').innerHTML = `还剩：${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+}
+
     // 初始化倒计时
     updateCountdown();
     updateExamCountdown();
     updateExamCountdown2();
     updateQingmingCountdown();
+    updateMidtermCountdown();
     // 每秒更新一次倒计时
     setInterval(updateCountdown, 1000);
     setInterval(updateExamCountdown, 1000);
     setInterval(updateExamCountdown2, 1000);
     setInterval(updateQingmingCountdown, 1000);
+    setInterval(updateMidtermCountdown, 1000);
 
     window.addEventListener('beforeunload', function () {
         localStorage.removeItem('isLoggedIn');

@@ -273,6 +273,12 @@ input:checked + .slider:before {
     height: auto;
     margin-bottom: 10px;
     border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 图片阴影 */
+    transition: transform 0.3s ease; /* 图片缩放过渡效果 */
+}
+
+.tab-content img:hover {
+    transform: scale(1.05); /* 鼠标悬停时图片放大 */
 }
 
 .tab-content video { /* 视频样式 */
@@ -281,6 +287,15 @@ input:checked + .slider:before {
     border-radius: 5px;
 }
 
+.bat-content video:hover { 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 图片阴影 */
+    transition: transform 0.5s ease; /* 图片缩放过渡效果 */
+}
+
 .tab-content { /* 内容区域样式 */
     margin-top: 5px;
+    display: grid; /* 使用网格布局 */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 自动适应列数 */
+    gap: 20px; /* 列之间的间距 */
+    margin-top: 20px; /* 上边距 */
 }
