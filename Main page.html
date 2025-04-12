@@ -49,6 +49,7 @@
         h6 {
             text-align: center;
         }
+
     </style>
 
 
@@ -292,6 +293,54 @@
     </script>
     </main>
   </div>
+
+  <div id="pie-chart-container" style="width: 90%; height: 400px; margin: 50px auto; border-radius: 10px;"></div>
+  <script>
+    // 初始化饼状图
+    var pieChart = echarts.init(document.getElementById('pie-chart-container'));
+
+    // 饼状图配置
+    var pieOption = {
+        title: {
+            text: '班级各科目成绩分布',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left'
+        },
+        series: [
+            {
+                name: '成绩分布',
+                type: 'pie',
+                radius: '50%',
+                data: [
+                    {value: 82, name: '语文'},
+                    {value: 95, name: '数学'},
+                    {value: 60, name: '英语'},
+                    {value: 80, name: '物理'},
+                    {value: 82, name: '地理'},
+                    {value: 84, name: '生物'},
+                    {value: 74, name: '历史'},
+                    {value: 88, name: '政治'}
+                ],
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    // 显示饼状图
+    pieChart.setOption(pieOption);
+</script>
 
 <div>
     <h3 class="h3_xywh">校园文化</h3>
