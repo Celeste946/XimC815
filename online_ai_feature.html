@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="./图标.png" type="image/x - icon">
+    <title>在线 AI 功能展示</title>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <script>
+        // 检查登录状态
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (!isLoggedIn || isLoggedIn !== 'true') {
+            alert('请先登录！');
+            window.location.href = './login.html';
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.setItem('username', username);
+        }
+    </script>
+
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-gray-800">在线 AI 功能</a>
+            <div class="space-x-4">
+                <a href="#" class="text-gray-600 hover:text-gray-800">首页</a>
+                <a href="#" class="text-gray-600 hover:text-gray-800">功能介绍</a>
+                <a href="./ai对话.html" class="text-gray-600 hover:text-gray-800">试用体验</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="bg-purple-600 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-4">释放在线 AI 无限潜力</h1>
+            <p class="text-lg mb-8">借助先进的在线 AI 功能，革新你的工作与生活方式。</p>
+            <a href="./ai对话.html" class="bg-white text-purple-600 py-3 px-6 rounded-full hover:bg-gray-100 transition duration-300">立即体验</a>
+        </div>
+    </section>
+
+    <!-- 功能介绍 -->
+    <section class="container mx-auto px-4 py-20">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">核心功能</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                <i class="fa-solid fa-language text-4xl text-purple-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">智能语言处理</h3>
+                <p class="text-gray-600">精准理解与生成自然语言，涵盖文本翻译、摘要提取等功能。</p>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                <i class="fa-solid fa-image text-4xl text-purple-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">图像识别分析</h3>
+                <p class="text-gray-600">快速识别图像中的物体、场景与特征，助力视觉分析。</p>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                <i class="fa-solid fa-chart-line text-4xl text-purple-600 mb-4"></i>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">数据分析预测</h3>
+                <p class="text-gray-600">深入剖析数据，预测趋势，为决策提供有力支持。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 优势展示 -->
+    <section class="bg-gray-200 py-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <img src="https://picsum.photos/600/400" alt="在线 AI 优势" class="rounded-lg shadow-md">
+            </div>
+            <div class="md:w-1/2 md:pl-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">选择我们在线 AI 的理由</h2>
+                <ul class="list-disc list-inside text-gray-600 mb-8">
+                    <li>实时响应，高效处理任务</li>
+                    <li>高度可定制，适配多样需求</li>
+                    <li>数据安全可靠，保障隐私</li>
+                </ul>
+                <a href="#" class="bg-purple-600 text-white py-3 px-6 rounded-full hover:bg-purple-700 transition duration-300">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 试用体验 -->
+    <section class="container mx-auto px-4 py-20 text-center">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">免费试用在线 AI 功能</h2>
+        <p class="text-gray-600 mb-8">立即注册，开启你的 AI 之旅。</p>
+        <form action="#" class="flex justify-center">
+            <input type="email" placeholder="输入你的邮箱地址" class="border border-gray-300 p-3 rounded-l-md w-1/2">
+            <button type="submit" class="bg-purple-600 text-white py-3 px-6 rounded-r-md hover:bg-purple-700 transition duration-300">开始试用</button>
+        </form>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-white shadow-md py-8">
+        <div class="container mx-auto px-4 text-center text-gray-600">
+            <p>&copy; 2025 在线 AI 功能。保留所有权利。</p>
+        </div>
+    </footer>
+</body>
+
+</html>
+    
