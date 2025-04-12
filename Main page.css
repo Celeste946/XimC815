@@ -282,7 +282,7 @@ input:checked + .slider:before {
 }
 
 .tab-content video { /* 视频样式 */
-    max-width: 100%;
+    max-width: auto;
     height: auto;
     border-radius: 5px;
 }

@@ -143,6 +143,8 @@
                                 const isLoggedIn = localStorage.getItem('isLoggedIn');
                                     if (!isLoggedIn || isLoggedIn === 'true') {
                                     localStorage.setItem('isLoggedIn', 'false');
+                                    localStorage.removeItem('isLoggedIn');
+                                    localStorage.removeItem('username');
                                     alert('您已退出登录');
                                     logoutBtn.style.display = 'none';
                                 }
@@ -230,6 +232,18 @@
                     <!-- 视频内容 -->
                     <video width="320" height="240" controls>
                         <source src="./mmexport1742579663250.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    
+                    <!-- 新增视频1 -->
+                    <video width="320" height="400" controls class="mb-3">
+                        <source src="http://lc-GUlTTf61.cn-n1.lcfile.com/6be7xWpOe6zyVykOBzNqnTqdvXVrRQJV/stodownload.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    
+                    <!-- 新增视频2 -->
+                    <video width="320" height="400" controls class="mb-3">
+                        <source src="http://lc-GUlTTf61.cn-n1.lcfile.com/CHDHJcYhLcF4HncYGup2gWmyJcUcpHjf/1624575635.mp4" type="video/mp4">
                         您的浏览器不支持视频播放。
                     </video>
                 </div>
