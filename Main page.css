@@ -299,3 +299,41 @@ input:checked + .slider:before {
     gap: 20px; /* 列之间的间距 */
     margin-top: 20px; /* 上边距 */
 }
+
+.image-flow {
+    display: flex;
+    overflow: hidden; /* 隐藏溢出的部分 */
+    width: 99; /* 宽度为99% */
+    height: 300px; /* 高度为300像素 */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 图片阴影 */
+    transition: transform 0.3s ease; /* 图片缩放过渡效果 */
+    margin: 10px;
+}
+
+.image-group { /* 图片组样式 */
+    display: flex; /* 使用弹性布局 */
+    border-radius: 8px;
+    animation: slideLeft 9s linear infinite; /* 10s 是动画持续时间 */
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(0);
+}
+    100% {
+        transform: translateX(-100%); 
+}
+}
+
+.neon-text {
+    font-size: 5rem;
+    font-weight: bold;
+    color: transparent;
+    background: linear-gradient(90deg, #ff00cc, #3333ff, #00ccff, #ff00cc);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: neonFlow 5s linear infinite;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  }
