@@ -236,14 +236,14 @@
                     </video>
                     
                     <!-- 新增视频1 -->
-                    <video width="320" height="400" controls class="mb-3">
-                        <source src="http://lc-GUlTTf61.cn-n1.lcfile.com/6be7xWpOe6zyVykOBzNqnTqdvXVrRQJV/stodownload.mp4" type="video/mp4">
+                    <video width="320" height="400" controls class="mb-3" preload="auto">
+                        <source src="./962943644.mp4" type="video/mp4">
                         您的浏览器不支持视频播放。
                     </video>
                     
                     <!-- 新增视频2 -->
-                    <video width="320" height="400" controls class="mb-3">
-                        <source src="http://lc-GUlTTf61.cn-n1.lcfile.com/CHDHJcYhLcF4HncYGup2gWmyJcUcpHjf/1624575635.mp4" type="video/mp4">
+                    <video width="320" height="400" controls class="mb-3" preload="auto">
+                        <source src="./1624575635.mp4" type="video/mp4">
                         您的浏览器不支持视频播放。
                     </video>
                 </div>
@@ -442,7 +442,7 @@
     // 设置第八周一模生地考试日期
     const examDate1 = new Date('2025-03-31T08:30:00');
     // 设置第十二周二模生地考试日期
-    const examDate2 = new Date('2025-05-12T08:30:00');
+    const examDate2 = new Date('2025-04-27T00:00:00');
     // 设置清明节日期
     const qingmingDate = new Date('2025-05-01T00:00:00');
     // 设置第十周期中考试日期
@@ -521,7 +521,7 @@ function updateMidtermCountdown() {
         const timeDifference = midtermDate - now;
 
         if (timeDifference <= 0) {
-            document.getElementById('exam-countdown').innerHTML = '第十周期中考试已开始！';
+            document.getElementById('midterm-countdown').innerHTML = '第十周期中考试已结束！';
             return;
         }
 
