@@ -75,7 +75,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" onclick="window.location.href='https://celeste946.github.io/Mobilde_iphon815/index'">移动端版本</button>
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">电脑端</button>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">PC端</button>
         </div>
       </div>
     </div>
@@ -107,36 +107,6 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="./sponsor.html">成为赞助商</a></li>
-                        <li><a class="dropdown-item" onclick="getHistory()" href="#">历史上的今天</a></li>
-                        <script>
-                            // 获取历史上的今天
-                            async function getHistory() {
-                                const apiUrl = 'https://api.52vmy.cn/api/wl/today';
-                                try {
-                                    const response = await fetch(apiUrl, {
-                                        headers: {
-                                            'Accept': 'application/json'
-                                        }
-                                    });
-                                    if (!response.ok) {
-                                        throw new Error(`HTTP error! status: ${response.status}`);
-                                    }
-                                    const data = await response.json();
-                                    if (data.code === 200) {
-                                        let historyInfo = '历史上的今天：\n\n';
-                                        data.data.forEach(event => {
-                                            historyInfo += `${event.year}年：${event.title}\n`;
-                                        });
-                                        alert(historyInfo);
-                                    } else {
-                                        alert('获取历史数据失败，请稍后再试');
-                                    }
-                                } catch (error) {
-                                    alert('无法获取历史信息，请检查网络连接');
-                                    console.error('请求出错:', error);
-                                }
-                            }
-                        </script>
                         <li><a class="dropdown-item" id="logoutBtn" onclick="Tuic()">退出登录</a></li>
                         <script>
                             function Tuic() {
@@ -172,7 +142,7 @@
                     <svg t="1742607930354" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6369" data-spm-anchor-id="a313x.search_index.0.i0.319a3a81Ap6v0q" width="30" height="30">
                         <path d="M870.26344 190.408821c-10.737563-9.749048-24.877622-15.083548-39.499659-15.083548-1.333369 0-2.666739 0-3.999085 0.092098-0.806366 0.091074-10.117438 0.645707-24.668867 0.645707-24.117305 0-71.201716-1.655711-115.803585-12.230568-57.590707-13.703107-124.056558-77.159411-143.392971-89.666272-9.748025-6.343481-20.967565-9.470708-32.209618-9.470708-11.196004 0-22.415545 3.127227-32.141057 9.379634-2.344397 1.563613-71.938498 73.569649-140.011964 89.757346-44.578332 10.574857-92.560185 12.230568-116.654977 12.230568-14.553475 0-23.839988-0.554633-24.758918-0.645707-1.264808-0.092098-2.529615-0.092098-3.816936-0.092098-14.645573 0-28.830658 5.333477-39.613246 15.083548-11.701518 10.574857-18.368365 25.380066-18.368365 40.922056l0 140.058013c0 517.749452 350.285225 584.42201 365.135459 587.085679 3.40352 0.555656 6.828529 0.829902 10.254562 0.829902 3.402497 0 6.873555-0.274246 10.230002-0.829902 14.87377-2.664692 367.732613-69.337251 367.732613-587.085679L888.67683 231.330877C888.67683 215.788887 881.98747 200.984701 870.26344 190.408821zM740.77926 390.700744l-242.8482 234.965664c-1.517565 2.480497-3.379984 4.967133-5.633306 7.081286-7.127335 6.897091-16.553018 10.20749-25.888649 10.023294-9.332562 0.184195-18.737779-3.126204-25.863067-10.023294-2.252299-2.114153-4.137231-4.600789-5.654796-7.081286l-129.780938-125.621194c-13.818741-13.33574-13.818741-34.944918 0-48.372756 13.816694-13.331646 36.231215-13.331646 50.049956 0l111.249868 107.689782 224.342712-217.030159c13.818741-13.33574 36.209726-13.33574 50.027443 0C754.596978 355.662704 754.596978 377.368074 740.77926 390.700744z" fill="#1afa29" p-id="6370" data-spm-anchor-id="a313x.search_index.0.i1.319a3a81Ap6v0q" class=""></path>
                     </svg>
-                    使用电脑浏览页面效果更佳！我们正在努力优化适配各种类型设备
+                    使用电脑浏览页面效果更佳！已支持部分移动端机型
                 </p>
             </div>
             <div class="row">
@@ -180,10 +150,10 @@
                     <div class="class-news">
                         <h4>最新公告</h4>
                         <ul class="list-group">
-                            <li class="list-group-item">第十周期中考试<span id="midterm-countdown"></span> </li>
-                            <li class="list-group-item">第八周一模生地考试<span id="exam-countdown"></span></li>
-                            <li class="list-group-item">第十二周二模生地考试<span id="exam-countdown2"></span></li>
-                            <li class="list-group-item">五一劳动节倒计时<span id="qingming-countdown"></span></li>
+                            <li class="list-group-item">运动会</li>
+                            <li class="list-group-item">第八周一模生地考试结束</li>
+                            <li class="list-group-item">第十二周二模生地考试结束</li>
+                            <li class="list-group-item">五一劳动节已过</li>
                         </ul>
                     </div>
                 </div>
@@ -200,6 +170,94 @@
                 </div>
             </div>
         </section>
+
+        <div class="announcement-container">
+            <div class="announcement-icon">
+                <svg t="1746166440130" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8188" width="20" height="20">
+                    <path d="M512 97.52381c228.912762 0 414.47619 185.563429 414.47619 414.47619s-185.563429 414.47619-414.47619 414.47619S97.52381 740.912762 97.52381 512 283.087238 97.52381 512 97.52381z m36.571429 341.333333h-73.142858v292.571428h73.142858V438.857143z m0-121.904762h-73.142858v73.142857h73.142858v-73.142857z" p-id="8189" fill="#ffffff"></path></svg>
+            </div>
+            <div class="announcement-content">
+              <div class="scrolling-text">
+                系统公告：服务器已转移新服务器，全新高速加载数据，速度更快，稳定性更强！地址：xinc815.pages.dev
+              </div>
+            </div>
+          </div>
+          
+          <style>
+          .announcement-container {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+          }
+          
+          .announcement-icon {
+            margin-right: 15px;
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+          }
+          
+          .announcement-content {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+          
+          .scrolling-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 15s linear infinite; /* 滚动速度 */
+            font-size: 16px;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+          }
+          
+          @keyframes scroll { /* 滚动动画 */
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(-100%);
+            }
+          }
+          
+          @keyframes pulse { /* 图标闪烁动画 */
+            0% {
+              transform: scale(1);
+            }
+            50% {
+              transform: scale(1.1);
+            }
+            100% {
+              transform: scale(1);
+            }
+          }
+          
+          /* 鼠标悬停暂停动画 */
+          .announcement-container:hover .scrolling-text {
+            animation-play-state: paused;
+          }
+          
+          /* 响应式设计 */
+          @media (max-width: 600px) {
+            .announcement-container {
+              padding: 10px 15px;
+              border-radius: 6px;
+            }
+            .scrolling-text {
+              font-size: 14px;
+              animation-duration: 15s; /* 调整滚动速度 */
+            }
+          }
+          </style>
+    
 
         <!-- 班级相册 -->
         <section id="gallery" class="mt-4">
@@ -228,23 +286,15 @@
                     <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/f0649c2fe588749fe8c6abd88fdb7b0897201621152bd4c9df8f4f86d69b5df49d162c309c7b619e48a1f34f67b5bce7?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347208411.jpg&size=750" class="img-fluid m-2" alt="班级图片10">
                     <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/ac4d50fe451f1b9324ab6dbb861a592acc2b2d54161a52c99375f7126e9f1192a202214cd4444616a94faff092e1d27d?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741792491098.jpg&size=750" class="img-fluid m-2" alt="班级图片11">
                     <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/a1f92109ee064bef87bbed6eca46cc57edba5b9c7fb800b42e305812b15159415e01c45040db1f74f14fbe787f893d70?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1742558687404.jpg&size=750" class="img-fluid m-2" alt="班级图片12">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/bfa26c9a5f33669fc8f5c532d2446ae44b2883652ee3943e55712beed0777cbda2025645ab16674f6399d0e76b53684d?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1746150607929.jpg&size=750" class="img-fluid m-2" alt="班级图片13">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/c871983e58c7fd4569f06e1784fc31fb050eabf47f3d646b12044d71347669e499aa5f0029e8e6780ab93d62cd939739?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1746150596142.jpg&size=750" class="img-fluid m-2" alt="班级图片14">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/3f01609b4ee0631e8071e5036fb96b9909e812fc73485339c940bb23fb8ff048a260efe6fe223aaf06281fb27c2a5fae?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1746150635640.jpg&size=750" class="img-fluid m-2" alt="班级图片15">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/e736217d1942583766ea43d048a0a773294b36272ff21e15765630791e446211d5f1e7ce30e4c32d77ef3c28b07d3d10?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1746150639656.jpg&size=750" class="img-fluid m-2" alt="班级图片16">
                 </div>
                 <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
                     <!-- 视频内容 -->
                     <video width="320" height="240" controls>
                         <source src="./mmexport1742579663250.mp4" type="video/mp4">
-                        您的浏览器不支持视频播放。
-                    </video>
-                    
-                    <!-- 新增视频1 -->
-                    <video width="320" height="400" controls class="mb-3" preload="auto">
-                        <source src="./962943644.mp4" type="video/mp4">
-                        您的浏览器不支持视频播放。
-                    </video>
-                    
-                    <!-- 新增视频2 -->
-                    <video width="320" height="400" controls class="mb-3" preload="auto">
-                        <source src="./1624575635.mp4" type="video/mp4">
                         您的浏览器不支持视频播放。
                     </video>
                 </div>
@@ -402,6 +452,7 @@
     xhr.send();
 </script>
 
+
 <div class="Meih" style="text-align: center; margin-top: 20px;"><h5>美好时刻</h5></div>
 <div class="image-flow">
     <div class="image-group">
@@ -440,21 +491,19 @@
 <script>
     // 设置中考日期，这里中考日期为 2025 年 6 月 30 日
     const examDate = new Date('2025-06-30T00:00:00');
-    // 设置第八周一模生地考试日期
-    const examDate1 = new Date('2025-03-31T08:30:00');
     // 设置第十二周二模生地考试日期
-    const examDate2 = new Date('2025-04-27T00:00:00');
+    //const examDate2 = new Date('2025-04-27T00:00:00');
     // 设置清明节日期
-    const qingmingDate = new Date('2025-05-01T00:00:00');
+    //const qingmingDate = new Date('2025-05-01T00:00:00');
     // 设置第十周期中考试日期
-    const midtermDate = new Date('2025-04-15T07:00:00');
+    //const midtermDate = new Date('2025-04-15T07:00:00');
 
     function updateExamCountdown2() {
         const now = new Date();
         const timeDifference = examDate2 - now;
 
         if (timeDifference <= 0) {
-            document.getElementById('exam-countdown2').innerHTML = '第十二周二模生地考试已开始！';
+            document.getElementById('exam-countdown2').innerHTML = '第十二周二模生地考试已结束！';
             return;
         }
 
@@ -536,21 +585,8 @@ function updateMidtermCountdown() {
 
     // 初始化倒计时
     updateCountdown();
-    updateExamCountdown();
-    updateExamCountdown2();
-    updateQingmingCountdown();
-    updateMidtermCountdown();
     // 每秒更新一次倒计时
     setInterval(updateCountdown, 1000);
-    setInterval(updateExamCountdown, 1000);
-    setInterval(updateExamCountdown2, 1000);
-    setInterval(updateQingmingCountdown, 1000);
-    setInterval(updateMidtermCountdown, 1000);
-
-    window.addEventListener('beforeunload', function () {
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('username');
-    });
 </script>
 </body>
 </html>
