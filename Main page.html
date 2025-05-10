@@ -6,25 +6,35 @@
     <title>815网站新线路提示</title>
 </head>
 <body>
-    <div class="card-cantent">
+    <div class="card-content">
         <div class="card">
             <h1>总部提示公告</h1>
-            <p>5月10号统一使用此<span><a href="https://xinc815.pages.dev/">https://xinc815.pages.dev/</a></span> 路线</p>
+            <p>5月10号统一使用此<a href="https://xinc815.pages.dev/">https://xinc815.pages.dev/</a>路线</p>
             <h2>为什么使用此路线？</h2>
-            <p>速度更快还有一些文件转移，之前服务器位置位于“美国洛杉矶”访问时需要大量时间加载数据，导致用户需要等待很久！</p>
+            <p>速度更快还有一些文件转移，之前服务器位置位于"美国洛杉矶"访问时需要大量时间加载数据，导致用户需要等待很久！</p>
             <h1>新路线有什么优势？</h1>
-            <p>先比之前速度加快了5-10倍</p>
+            <p>相比之前速度加快了5-10倍</p>
             <button class="but">立即跳转</button>
             <script>
-                document.getElementsByClassName('but')[0].onclick = function(){
+                document.querySelector('.but').addEventListener('click', function(){
                     window.location.href = 'https://xinc815.pages.dev/'; 
-                }
+                });
             </script>
         </div>
     </div>
     <style>
         body{
             background: #e9e3e3;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .card-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
         }
         .card-cantent{
         display: flex;
