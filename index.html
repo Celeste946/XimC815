@@ -128,7 +128,6 @@
             </div>
         </div>
     </nav>
-
 <!--小背景-->
 <img class="Xbj" src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/8e58981d9c7f08f9974aea4db358582ece7ffa8920b17a281417c3763f56ee47ba93d059ad161a2fb8798b664abb0606?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1742579643950.jpg&size=750" alt="">
 
@@ -178,10 +177,11 @@
             </div>
             <div class="announcement-content">
               <div class="scrolling-text">
-                系统公告：服务器已转移新服务器，全新高速加载数据，速度更快，稳定性更强！地址：xinc815.pages.dev
+                系统公告：建议使用新地址，全新高速加载数据，速度更快，稳定性更强！地址：xinc815.pages.dev
               </div>
             </div>
           </div>
+
           
           <style>
           .announcement-container {
@@ -293,8 +293,16 @@
                 </div>
                 <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
                     <!-- 视频内容 -->
-                    <video width="320" height="240" controls>
+                    <video width="320" height="340" controls>
                         <source src="./mmexport1742579663250.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    <video width="400" height="440" controls> 
+                        <source src="/mmexport1746949439500.mp4" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
+                    <video width="400" height="440" controls> 
+                        <source src="/stodownload.mp4" type="video/mp4">
                         您的浏览器不支持视频播放。
                     </video>
                 </div>
@@ -425,54 +433,70 @@
     <p>追云十五 沉舟破釜 生地佳绩 非我莫属</p>
 </div>
 
-<h6>获取服务器延迟</h6>
-<p id="result">正在测试连接GitHub的延迟...</p>
+
+<canvas id="myChart" style="height: 120px;"></canvas> <!-- 图表容器 -->
 <script>
-    // 创建一个XMLHttpRequest对象
-    const xhr = new XMLHttpRequest();
-    // 记录开始时间
-    const startTime = Date.now();
-
-    // 配置请求
-    xhr.open('GET', 'https://api.github.com', true);
-
-    // 当请求状态改变时的回调函数
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        // 记录结束时间
-        const endTime = Date.now();
-        // 计算延迟时间
-        const latency = endTime - startTime;
-        // 更新页面显示结果
-        document.getElementById('result').innerHTML = `连接GitHub的延迟为: ${latency} 毫秒`;
-      }
-    };
-
-    // 发送请求
-    xhr.send();
+    const ctx = document.getElementById('myChart').getContext('2d');
+    if (ctx) {
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'State', // 折线图的名称
+                    data: [5, 15, 8, 6, 10, 13, 20],
+                    backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    tension: 0.1,
+                    fill: true // 填充线条内部区域
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(0, 0, 0, 0.7)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(0, 0, 0, 0.7)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'rgba(0, 0, 0, 0.7)'
+                        }
+                    }
+                },
+                elements: {
+                    line: {
+                        tension: 0.1,
+                        borderCapStyle: 'round'
+                    }
+                }
+            }
+        });
+    } else {
+        console.error('无法获取画布上下文');
+    }
 </script>
 
-
-<div class="Meih" style="text-align: center; margin-top: 20px;"><h5>美好时刻</h5></div>
-<div class="image-flow">
-    <div class="image-group">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/f22dcb29c03e04a36eecb250fccdbfbb586d4fb43a3376f69545c1d4c99b86f41edd31b6d2da372dd86ab0f1cd99819e?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811210344.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/231267555a864ff38b76cb14f78d3124be646b1c37ac929c1fa529da59ccdb0a98cddf84e294dc57512f38678124d710?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811199579.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d868ea220930ad157425a7ffaf2c14063e0d13208e382cdd645bf04a963cd8dc144d2dc93541805977cd85f6a3cfbbae?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740811025198.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/f0649c2fe588749fe8c6abd88fdb7b0897201621152bd4c9df8f4f86d69b5df49d162c309c7b619e48a1f34f67b5bce7?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347208411.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/cb15ea95b4c446923bf0ca4feaa1af4e1e1e8bd923c33d064d3d882841b3d878feffc564c78a9d640515d20789897094?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741430248213.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/ac4d50fe451f1b9324ab6dbb861a592acc2b2d54161a52c99375f7126e9f1192a202214cd4444616a94faff092e1d27d?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741792491098.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/8e58981d9c7f08f9974aea4db358582ece7ffa8920b17a281417c3763f56ee47ba93d059ad161a2fb8798b664abb0606?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1742579643950.jpg&size=750" alt="">
-    </div>
-    <div class="image-group">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/1534a9cfd4ed575023c8b6fed699eabae3e44d1b52f2233b48e14e462ad6b7088e717a0b675a47058977af9fb7bfb994?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1740808957422.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4597154d71c0a4bd8ebe895167d9ed8c3f6e6af86c1f9663f4ccd1b9373c4387b0ba227abee54d2fe4390bd4f9323483?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347193729.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4f1716ec660e091132565ddbbb1f65cd27702d0706a341bc6a2535d2fd4d88e067dddfb155865844abd50b2ef8be7fba?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347231301.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d62b9b849a31ce4c6f0d2b7a3408290e394a3f12a475e18e407d6f2b18106229420fcef08a4312e3041418ffd3f0e563?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347216445.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/cb15ea95b4c446923bf0ca4feaa1af4e1e1e8bd923c33d064d3d882841b3d878feffc564c78a9d640515d20789897094?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741430248213.jpg&size=750" alt="">
-      <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/a1f92109ee064bef87bbed6eca46cc57edba5b9c7fb800b42e305812b15159415e01c45040db1f74f14fbe787f893d70?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1742558687404.jpg&size=750" alt="">
-    </div>
-  </div>
 <!-- https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js -->
 
 <!-- 页脚 -->
@@ -483,7 +507,10 @@
         <svg t="1742018574406" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4547" width="35" height="35"><path d="M512 42.666667A464.64 464.64 0 0 0 42.666667 502.186667 460.373333 460.373333 0 0 0 363.52 938.666667c23.466667 4.266667 32-9.813333 32-22.186667v-78.08c-130.56 27.733333-158.293333-61.44-158.293333-61.44a122.026667 122.026667 0 0 0-52.053334-67.413333c-42.666667-28.16 3.413333-27.733333 3.413334-27.733334a98.56 98.56 0 0 1 71.68 47.36 101.12 101.12 0 0 0 136.533333 37.973334 99.413333 99.413333 0 0 1 29.866667-61.44c-104.106667-11.52-213.333333-50.773333-213.333334-226.986667a177.066667 177.066667 0 0 1 47.36-124.16 161.28 161.28 0 0 1 4.693334-121.173333s39.68-12.373333 128 46.933333a455.68 455.68 0 0 1 234.666666 0c89.6-59.306667 128-46.933333 128-46.933333a161.28 161.28 0 0 1 4.693334 121.173333A177.066667 177.066667 0 0 1 810.666667 477.866667c0 176.64-110.08 215.466667-213.333334 226.986666a106.666667 106.666667 0 0 1 32 85.333334v125.866666c0 14.933333 8.533333 26.88 32 22.186667A460.8 460.8 0 0 0 981.333333 502.186667 464.64 464.64 0 0 0 512 42.666667" fill="#ffffff" p-id="4548"></path></svg>
         <svg t="1742018755578" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5579" width="35" height="35"><path d="M915.2 448l-4.2-17.8H524V594h231.2c-24 114-135.4 174-226.4 174-66.2 0-136-27.8-182.2-72.6-47.4-46-77.6-113.8-77.6-183.6 0-69 31-138 76.2-183.4 45-45.2 113.2-70.8 181-70.8 77.6 0 133.2 41.2 154 60l116.4-115.8c-34.2-30-128-105.6-274.2-105.6-112.8 0-221 43.2-300 122C144.4 295.8 104 408 104 512s38.2 210.8 113.8 289c80.8 83.4 195.2 127 313 127 107.2 0 208.8-42 281.2-118.2 71.2-75 108-178.8 108-287.6 0-45.8-4.6-73-4.8-74.2z" p-id="5580" fill="#ffffff"></path></svg>
         <svg t="1742018874205" class="icon" viewBox="0 0 2048 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6767" width="35" height="35"><path d="M1183.28915187 848.05331375c277.37282531-17.84228063 532.63828219-114.69529781 768-215.99111437-161.36245875 107.97778594-980.15253656 518.77674938-985.66160625 239.34246562 1.06627219-34.47612 15.46094062-72.36430969 44.1791925-113.55794156 25.41280969-40.05627563 61.87930406-80.14809375 98.34579844-123.58089563 56.37023344-65.68234031 195.58978125-218.19474281 243.10995844-312.80859 8.85005531-17.80673812 14.35912594-34.5116625 16.56275531-48.97741594 5.54461312-84.59089219-101.65124062-118.00074-260.77452844-162.53535656l-30.92188031 18.90855188 59.67567563 48.97741593C867.24620469 225.70603438 705.95483187 275.8208075 510.36504969 344.84413156l27.61643906 70.12513875-98.34579844 96.85301813c16.56275437 3.34098469 187.84154062 61.23954094 364.66493906-63.44316938l1.06627219-1.13735718 2.23917-2.2036275c-5.54461312-8.88559781-16.59829687-18.94409437-32.0592375-31.17067782 53.06479125 3.34098469 85.08848531 50.11477219 79.57941563 97.95483188h-23.20918219c1.06627219-16.70492438-3.30544219-32.27249156-7.74824156-44.5346175-137.01592031 102.43317281-297.24102188 115.7971125-433.1551275 67.88596875v120.27545344c-67.42391719 23.35135125-182.33246906 96.85301719-182.33246907 166.97815593 4.40725687 34.5116625 20.97001125 46.7737875 37.56830813 55.65938531 150.2732325 85.72824844 556.94927813-31.17067781 555.81192094-31.17067687C656.23102531 922.62125094 511.46686437 982.75897812 297.07515781 991.64457594c-283.98370969-5.58015562-324.85746-195.94520531-193.35061125-394.09403907 127.06405031-200.38800469 327.06108844-378.52647188 646.40947781-492.08441343C842.97075125 72.05627563 978.88485781 35.34098469 1110.39170656 32c188.94335438 0 372.37763812 56.7612 360.22214063 240.47982188-8.85005531 141.38763375-205.54165125 335.09366906-311.63569125 477.5831175-46.38282094 61.23954094-54.1310625 103.5349875 24.31099593 97.95483187zM1362.35172125 205.62458375c43.46834531 16.70492438 55.87263937 35.64901875 43.46834531 55.65938531 12.4398375-22.2495375 0-41.15808937-43.46834531-55.65938531z" fill="#ffffff" p-id="6768"></path></svg>
+        <svg t="1746270320054" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4963" width="35" height="35">
+            <path d="M1024.0512 701.0304V196.864A196.9664 196.9664 0 0 0 827.136 0H196.864A196.9664 196.9664 0 0 0 0 196.864v630.272A196.9152 196.9152 0 0 0 196.864 1024h630.272a197.12 197.12 0 0 0 193.8432-162.0992c-52.224-22.6304-278.528-120.32-396.4416-176.64-89.7024 108.6976-183.7056 173.9264-325.3248 173.9264s-236.1856-87.2448-224.8192-194.048c7.4752-70.0416 55.552-184.576 264.2944-164.9664 110.08 10.3424 160.4096 30.8736 250.1632 60.5184 23.1936-42.5984 42.496-89.4464 57.1392-139.264H248.064v-39.424h196.9152V311.1424H204.8V267.776h240.128V165.632s2.1504-15.9744 19.8144-15.9744h98.4576V267.776h256v43.4176h-256V381.952h208.8448a805.9904 805.9904 0 0 1-84.8384 212.6848c60.672 22.016 336.7936 106.3936 336.7936 106.3936zM283.5456 791.6032c-149.6576 0-173.312-94.464-165.376-133.9392 7.8336-39.3216 51.2-90.624 134.4-90.624 95.5904 0 181.248 24.4736 284.0576 74.5472-72.192 94.0032-160.9216 150.016-253.0816 150.016z" fill="#009FE8" p-id="4964"></path></svg>
     </div>
+    <p style="text-align: center; margin-top: 20px;">公安 粤ICP备2025008692-2号</p>
 </footer>
 
 <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

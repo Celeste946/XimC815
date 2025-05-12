@@ -7,32 +7,189 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="./图标.png" type="image/x - icon">
-    <title>在线 AI 功能展示</title>
+    <title>在线 DeepSeek 模型展示</title>
 </head>
 
 <body class="bg-gray-100 font-sans">
     <script>
-        // 检查登录状态
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
-        if (!isLoggedIn || isLoggedIn !== 'true') {
-            alert('请先登录！');
-            window.location.href = './login.html';
-            localStorage.setItem('isLoggedIn', 'false');
-            localStorage.setItem('username', username);
+        // 优化后的登录状态检查
+        function checkAuthStatus() {
+            // 检查是否有有效的登录令牌
+            const authToken = localStorage.getItem('authToken');
+            const tokenExpiry = localStorage.getItem('tokenExpiry');
+            
+            // 如果有令牌且未过期
+            if (authToken && tokenExpiry && Date.now() < parseInt(tokenExpiry)) {
+                // 跳转到主页
+                //window.location.href = '';
+                return true;
+            }
+            
+            // 如果令牌过期或无效，清除存储
+            if (authToken) {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('tokenExpiry');
+                localStorage.removeItem('username');
+            }
+            return false;
+        }
+        
+        // 页面加载时检查
+        if (checkAuthStatus()) {
+            // 如果已登录，下面的内容不会执行
+            // 因为页面会跳转
         }
     </script>
 
     <!-- 导航栏 -->
     <nav class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-gray-800">在线 AI 功能</a>
-            <div class="space-x-4">
+            <a href="#" class="text-xl font-bold text-gray-800">在线 DeepSeek 模型展示</a>
+            <div class="flex items-center space-x-4">
                 <a href="#" class="text-gray-600 hover:text-gray-800">首页</a>
                 <a href="#" class="text-gray-600 hover:text-gray-800">功能介绍</a>
                 <a href="./ai对话.html" class="text-gray-600 hover:text-gray-800">试用体验</a>
+                
+                <!-- 通知铃铛 -->
+                <div class="relative">
+                    <button id="notificationBtn" class="text-gray-600 hover:text-gray-800 relative">
+                        <i class="fa-solid fa-bell text-xl"></i>
+                        <span id="notificationBadge" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                    
+                    <!-- 下拉通知面板 -->
+                    <div id="notificationPanel" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg z-50">
+                        <div class="p-4 border-b border-gray-200">
+                            <h3 class="font-bold text-gray-800">最新通知 (3)</h3>
+                        </div>
+                        <div class="divide-y divide-gray-200">
+                            <a href="#" class="block p-3 hover:bg-gray-50">
+                                <p class="text-sm text-gray-700">新增2个AI大模型</p>
+                                <p class="text-xs text-gray-500">8小时前</p>
+                            </a>
+                            <a href="#" class="block p-3 hover:bg-gray-50">
+                                <p class="text-sm text-gray-700">优化了用户界面体验</p>
+                                <p class="text-xs text-gray-500">2025-4-30</p>
+                            </a>
+                            <a href="#" class="block p-3 hover:bg-gray-50">
+                                <p class="text-sm text-gray-700">系统维护通知</p>
+                                <p class="text-xs text-gray-500">2025-5-2</p>
+                            </a>
+                        </div>
+                        <div class="p-2 text-center bg-gray-50">
+                            <a href="#" id="viewAllBtn" class="text-sm text-purple-600 hover:underline">查看全部</a>
+                        </div>
+                    </div>
+                
+                    <!-- 弹窗组件（只保留一个） -->
+                    <div id="notificationModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div class="bg-white rounded-lg shadow-xl w-1/2 max-h-[80vh] overflow-y-auto">
+                            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                                <h3 class="font-bold text-lg text-gray-800">全部通知</h3>
+                                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                                    <i class="fa-solid fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <!-- 这里可以放更多的通知内容 -->
+                                <div class="mb-4 p-3 border-b border-gray-100">
+                                    <p class="text-sm text-gray-700">新增2个AI大模型“deepSeek-V3-0324 and deepSeek-R1”</p>
+                                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/88208b705d84cbad66b9adefcc19a82c94e47f16e3cfc7b11d90c4c2981d70b63b4fd833ec2a914cda67a5dc521eb721?pictype=scale&from=30113&version=3.3.3.3&fname=%E6%8D%95%E8%8E%B72.PNG&size=750" alt="">
+                                    <img style="margin-top: 10px;" src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/131d77f4af1eada365239ed5d14c3ec7dfdfb794e418dd2635a6b4b1d0872517d95b5c63c92a0a7f4ccafea275b1357f?pictype=scale&from=30113&version=3.3.3.3&fname=%E6%8D%95%E8%8E%B73.PNG&size=750" alt="">
+                                    <p class="text-xs text-gray-500">8小时前</p>
+                                </div>
+                                <div class="mb-4 p-3 border-b border-gray-100">
+                                    <p class="text-sm text-gray-700">优化了用户界面体验</p>
+                                    <p class="text-xs text-gray-500">2025-4-30</p>
+                                </div>
+                                <div class="mb-4 p-3 border-b border-gray-100">
+                                    <p class="text-sm text-gray-700">系统维护通知</p>
+                                    <p class="text-xs text-gray-500">2025-5-2</p>
+                                </div>
+                                <!-- 可以继续添加更多通知 -->
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- 统一脚本（只保留一个） -->
+                    <script>
+                        function setupNotification() {
+                            const notificationBtn = document.getElementById('notificationBtn');
+                            const panel = document.getElementById('notificationPanel');
+                            const badge = document.getElementById('notificationBadge');
+                            const modal = document.getElementById('notificationModal');
+                            const viewAllBtn = document.getElementById('viewAllBtn');
+                            const closeModalBtn = document.getElementById('closeModalBtn');
+                            
+                            if(localStorage.getItem('notificationsRead')) {
+                                badge.classList.add('hidden');
+                            }
+
+                            notificationBtn.addEventListener('click', function(e) {
+                                e.stopPropagation();
+                                panel.classList.toggle('hidden');
+                                
+                                if(!panel.classList.contains('hidden')) {
+                                    badge.classList.add('hidden');
+                                    localStorage.setItem('notificationsRead', 'true');
+                                }
+                            });
+
+                            viewAllBtn.addEventListener('click', function(e) {
+                                e.preventDefault();
+                                panel.classList.add('hidden');
+                                modal.classList.remove('hidden');
+                            });
+
+                            closeModalBtn.addEventListener('click', function() {
+                                modal.classList.add('hidden');
+                            });
+
+                            modal.addEventListener('click', function(e) {
+                                if(e.target === modal) {
+                                    modal.classList.add('hidden');
+                                }
+                            });
+
+                            document.addEventListener('click', function() {
+                                panel.classList.add('hidden');
+                            });
+                        }
+                        
+                        document.addEventListener('DOMContentLoaded', setupNotification);
+                    </script>
+                </div>
             </div>
         </div>
     </nav>
+
+    <!-- 弹窗组件（只保留一个） -->
+    <div id="notificationModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl w-1/2 max-h-[80vh] overflow-y-auto">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="font-bold text-lg text-gray-800">全部通知</h3>
+                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <!-- 这里可以放更多的通知内容 -->
+                <div class="mb-4 p-3 border-b border-gray-100">
+                    <p class="text-sm text-gray-700">新增2个AI大模型</p>
+                    <p class="text-xs text-gray-500">8小时前</p>
+                </div>
+                <div class="mb-4 p-3 border-b border-gray-100">
+                    <p class="text-sm text-gray-700">优化了用户界面体验</p>
+                    <p class="text-xs text-gray-500">2025-4-30</p>
+                </div>
+                <div class="mb-4 p-3 border-b border-gray-100">
+                    <p class="text-sm text-gray-700">系统维护通知</p>
+                    <p class="text-xs text-gray-500">2025-5-2</p>
+                </div>
+                <!-- 可以继续添加更多通知 -->
+            </div>
+        </div>
+    </div>
 
     <!-- 英雄区域 -->
     <section class="bg-purple-600 text-white py-20">
@@ -69,7 +226,7 @@
     <section class="bg-gray-200 py-20">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-8 md:mb-0">
-                <img src="https://picsum.photos/600/400" alt="在线 AI 优势" class="rounded-lg shadow-md">
+                <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/286296add0e3c2bdf32c7dd5348a5deb10914ed6b111d6949d4c2a0583b675c71792e352d1ac8cf90fa5e861701c9223?pictype=scale&from=30113&version=3.3.3.3&fname=%E6%8D%95%E8%8E%B7.PNG&size=750" alt="在线 AI 优势" class="rounded-lg shadow-md">
             </div>
             <div class="md:w-1/2 md:pl-12">
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">选择我们在线 AI 的理由</h2>
@@ -102,4 +259,3 @@
 </body>
 
 </html>
-    
