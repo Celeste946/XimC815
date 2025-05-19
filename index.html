@@ -28,6 +28,7 @@
             margin-top: 5px;
             margin-left: auto; /* 左侧间距为自动 */
             padding-right: 5px; /* 右侧间距为10px */
+            color: red;
         }
 
         #exam-countdown {
@@ -98,8 +99,6 @@
                         </script>
                     </ul>
                 </ul>
-                <!-- 倒计时显示 -->
-                <div id="countdown"></div>
             </div>
         </div>
     </nav>
@@ -113,10 +112,11 @@
             <div class="TX">
                 <p style="text-align: center;">
                     <!-- 将 svg 图标移到文字左边 -->
-                    <svg t="1742607930354" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6369" data-spm-anchor-id="a313x.search_index.0.i0.319a3a81Ap6v0q" width="30" height="30">
-                        <path d="M870.26344 190.408821c-10.737563-9.749048-24.877622-15.083548-39.499659-15.083548-1.333369 0-2.666739 0-3.999085 0.092098-0.806366 0.091074-10.117438 0.645707-24.668867 0.645707-24.117305 0-71.201716-1.655711-115.803585-12.230568-57.590707-13.703107-124.056558-77.159411-143.392971-89.666272-9.748025-6.343481-20.967565-9.470708-32.209618-9.470708-11.196004 0-22.415545 3.127227-32.141057 9.379634-2.344397 1.563613-71.938498 73.569649-140.011964 89.757346-44.578332 10.574857-92.560185 12.230568-116.654977 12.230568-14.553475 0-23.839988-0.554633-24.758918-0.645707-1.264808-0.092098-2.529615-0.092098-3.816936-0.092098-14.645573 0-28.830658 5.333477-39.613246 15.083548-11.701518 10.574857-18.368365 25.380066-18.368365 40.922056l0 140.058013c0 517.749452 350.285225 584.42201 365.135459 587.085679 3.40352 0.555656 6.828529 0.829902 10.254562 0.829902 3.402497 0 6.873555-0.274246 10.230002-0.829902 14.87377-2.664692 367.732613-69.337251 367.732613-587.085679L888.67683 231.330877C888.67683 215.788887 881.98747 200.984701 870.26344 190.408821zM740.77926 390.700744l-242.8482 234.965664c-1.517565 2.480497-3.379984 4.967133-5.633306 7.081286-7.127335 6.897091-16.553018 10.20749-25.888649 10.023294-9.332562 0.184195-18.737779-3.126204-25.863067-10.023294-2.252299-2.114153-4.137231-4.600789-5.654796-7.081286l-129.780938-125.621194c-13.818741-13.33574-13.818741-34.944918 0-48.372756 13.816694-13.331646 36.231215-13.331646 50.049956 0l111.249868 107.689782 224.342712-217.030159c13.818741-13.33574 36.209726-13.33574 50.027443 0C754.596978 355.662704 754.596978 377.368074 740.77926 390.700744z" fill="#1afa29" p-id="6370" data-spm-anchor-id="a313x.search_index.0.i1.319a3a81Ap6v0q" class=""></path>
+                    <svg t="1747666751343" class="icon" viewBox="0 0 1034 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5958" width="25" height="25">
+                        <path d="M1011.982 842.518 606.673 140.565c-49.575-85.822-130.595-85.822-180.157 0L21.205 842.518c-49.562 85.91-9.015 155.99 90.04 155.99l810.693 0C1020.997 998.507 1061.502 928.423 1011.982 842.518zM460.924 339.737c14.565-15.747 33.082-23.622 55.665-23.622 22.595 0 41.095 7.792 55.675 23.307 14.485 15.55 21.725 34.997 21.725 58.382 0 20.12-30.235 168.07-40.32 275.704l-72.825 0c-8.845-107.635-41.652-255.584-41.652-275.704C439.194 374.774 446.446 355.407 460.924 339.737zM571.244 851.538c-15.32 14.92-33.55 22.355-54.65 22.355-21.095 0-39.33-7.435-54.647-22.355-15.275-14.885-22.867-32.915-22.867-54.09 0-21.065 7.592-39.29 22.867-54.565 15.317-15.28 33.552-22.92 54.647-22.92 21.1 0 39.33 7.64 54.65 22.92 15.265 15.275 22.875 33.5 22.875 54.565C594.119 818.623 586.509 836.653 571.244 851.538z" fill="#d81e06" p-id="5959"></path>
                     </svg>
-                    使用电脑浏览页面效果更佳！已支持部分移动端机型
+                    <!-- 倒计时显示 -->
+                    <span id="countdown"></span>
                 </p>
             </div>
             <div class="row">
@@ -124,10 +124,10 @@
                     <div class="class-news">
                         <h4>最新公告</h4>
                         <ul class="list-group">
-                            <li class="list-group-item">运动会</li>
-                            <li class="list-group-item">第八周一模生地考试结束</li>
-                            <li class="list-group-item">第十二周二模生地考试结束</li>
-                            <li class="list-group-item">五一劳动节已过</li>
+                            <li class="list-group-item">生地考试最后一摸“三模”！</li>
+                            <li class="list-group-item">音乐美术期末考试</li>
+                            <li class="list-group-item">学期已到尾声</li>
+                            <li class="list-group-item">加加油还有40天！</li>
                         </ul>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                         <div class="card-body">
                             <p>6月30日：生地中考</p>
                             <p>5月1日：劳动假期</p>
-                            <p>4月4日：清明节</p>
+                            <p>5月12日：汶川地震17周年</p>
                             <p>3月12日：孙中山逝世100周年</p>
                         </div>
                     </div>
@@ -265,6 +265,16 @@
                     <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/c871983e58c7fd4569f06e1784fc31fb050eabf47f3d646b12044d71347669e499aa5f0029e8e6780ab93d62cd939739?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1746150596142.jpg&size=750" class="img-fluid m-2" alt="班级图片14">
                     <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/3f01609b4ee0631e8071e5036fb96b9909e812fc73485339c940bb23fb8ff048a260efe6fe223aaf06281fb27c2a5fae?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1746150635640.jpg&size=750" class="img-fluid m-2" alt="班级图片15">
                     <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/e736217d1942583766ea43d048a0a773294b36272ff21e15765630791e446211d5f1e7ce30e4c32d77ef3c28b07d3d10?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1746150639656.jpg&size=750" class="img-fluid m-2" alt="班级图片16">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/c0c967ce8c0b837513c6e30283bd8cefd737155f100bb7b187d0c83005bb4b508ffc572dd5bbaa2d95350e6ad19dc756?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665567771.jpg&size=750" class="img-fluid m-2" alt="班级图片17">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4b41489fc9fa6d575b5e5813be2aa26abd84c7acee6f34f9ac9d561ed371d7267b4e51a2f8f3f4a6ba8f92f0bcac7278?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665561137.jpg&size=750" class="img-fluid m-2" alt="班级图片18">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/d57fc692f6c1b4ea75b49072fe97509983a3b8ec367fbba6baf7f8c829b2455c4789e8fa65d1774bc4af0551d8b818ca?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665554241.jpg&size=750" class="img-fluid m-2" alt="班级图片19">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/aea33f7deb18c6a40580f3eba736169be3ac7b1027d6aad5cb2c50323f8c9ac8d6f846435f36427451710d280804b98f?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665634196.jpg&size=750" class="img-fluid m-2" alt="班级图片20">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4979a3f42279cf28bc44d6206c2024c6c35b1e1f19964fe4b3df3dbf57e6b9e2bc297e77b951d4d828511f8a57bef406?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665628960.jpg&size=750" class="img-fluid m-2" alt="班级图片21">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/1c42856e1682634147a0d8eeb5634c299632828f107c6adbb190a05c898fa591c6a54c399ba7e53a5768fc7e17eafeb2?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665593695.jpg&size=750" class="img-fluid m-2" alt="班级图片22">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/0536eecf093690e074af6f69e8aded09cb2c707995b0f406ac55be084421c682f08692e318a46ad48b091b2c6570fa79?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665589093.jpg&size=750" class="img-fluid m-2" alt="班级图片23">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/99d74e9851b6e7136538152c8e9037a73fbc92e42c860139e8d886fb4540fc4fc229a7c7fd942bb5d1d77b196144585d?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665619928.jpg&size=750" class="img-fluid m-2" alt="班级图片24">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/048bbbfc3256b1a9da140a72d3ad45b4af09daea4e94074d6c236f525e5a574703af137d1462592e8d6000aeab83d691?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665616097.jpg&size=750" class="img-fluid m-2" alt="班级图片25">
+                    <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/25bb7af1d71f86ee9e734c863eb30217b305b90795c2c482665ee44a8404e5dfede5dbedc24161d93ce79fe1db874494?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747665601176.jpg&size=750" class="img-fluid m-2" alt="班级图片26">
                 </div>
                 <div class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
                     <!-- 视频内容 -->
