@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <title>AI对话助手</title>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --user-color: #4a8cff;
+            --ai-color: #4cc9f0;
+            --reasoner-color: #7209b7;
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 120px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .message-container {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 100%;
+        }
+        
+        .message-container.user {
+            justify-content: flex-end;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            margin-top: 0.5rem;
+        }
+        
+        .user-avatar {
+            background-color: var(--user-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .ai-avatar {
+            background-color: var(--ai-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .reasoner-avatar {
+            background-color: var(--reasoner-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .message-content {
+            display: flex;
+            flex-direction: column;
+            max-width: calc(100% - 60px);
+        }
+        
+        .message {
+            padding: 1rem 1.25rem;
+            border-radius: 1rem;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+        
+        .user-message {
+            background-color: var(--user-color);
+            color: white;
+            border-bottom-right-radius: 0.25rem;
+        }
+        
+        .ai-message {
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-bottom-left-radius: 0.25rem;
+        }
+        
+        .reasoner-message {
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(114, 9, 183, 0.15);
+            border-left: 3px solid var(--reasoner-color);
+            border-bottom-left-radius: 0.25rem;
+        }
+        
+        .input-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-color);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+        
+        .input-wrapper {
+            width: 100%;
+            max-width: 720px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .model-selector {
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+        }
+        
+        #model-select { /* 模型选择下拉框 */
+            padding: 0.5rem;
+            border: 1px solid #e9ecef;
+            border-radius: 0.5rem; /* 圆角 */
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background-color: white;
+        }
+        
+        #model-select:focus {
+            border-color: var(--primary-color);
+        }
+        
+        #user-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #e9ecef;
+            border-radius: 1.5rem;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        #user-input:focus {
+            border-color: var(--primary-color);
+        }
+        
+        #send-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 1.5rem;
+            padding: 0 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+        
+        #send-btn:hover {
+            background-color: #3a56d4;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .timestamp {
+            font-size: 0.75rem;
+            color: #adb5bd;
+            margin-top: 0.5rem;
+        }
+        
+        .user-timestamp {
+            text-align: right;
+        }
+        
+        .ai-timestamp {
+            text-align: left;
+        }
+        
+        .typing-indicator {
+            display: inline-block;
+            padding-left: 5px;
+        }
+        
+        .typing-indicator span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #999;
+            margin-right: 3px;
+            animation: typing 1s infinite ease-in-out;
+        }
+        
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .model-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            background-color: #e9ecef;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.5rem;
+            margin-left: 0.5rem;
+            color: #495057;
+        }
+        
+        .reasoner-tag {
+            background-color: #f3e8ff;
+            color: var(--reasoner-color);
+            font-weight: 500;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        
+        .model-info {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 0.2rem;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        /* 打字机效果的光标 */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: currentColor;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>AI对话助手 <span class="model-info">(DeepSeek-Chat模型)</span></h1>
+    <div class="welcome-message">请在下方的输入框中输入您的问题</div>
+    
+    <div class="chat-container" id="chat-box">
+        <!-- 初始时不显示任何消息 -->
+    </div>
+    
+    <div class="input-container">
+        <div class="input-wrapper">
+            <div class="model-selector">
+                <select id="model-select">
+                    <option value="deepseek-chat">DeepSeek-Chat</option>
+                    <option value="deepseek-reasoner">DeepSeek-R1</option>
+                </select>
+            </div>
+            <input type="text" id="user-input" placeholder="输入您的问题..." autofocus>
+            <button id="send-btn">发送</button>
+        </div>
+    </div>
+    <div id="error-display" class="error-message"></div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+        const modelSelect = document.getElementById('model-select');
+        const errorDisplay = document.getElementById('error-display');
+        const modelInfo = document.querySelector('.model-info');
+        
+        // 配置DeepSeek API
+        const API_KEY = 'sk-31fb2577b51a4e109a35eafd326b3f2e';
+        const API_URL = 'https://api.deepseek.com/v1/chat/completions';
+        
+        // 对话历史 - 初始只有系统消息
+        let conversationHistory = [
+            { role: "system", content: "You are a helpful assistant." }
+        ];
+        
+        // 模型显示名称映射
+        const modelDisplayNames = {
+            'deepseek-chat': 'DeepSeek-Chat',
+            'deepseek-reasoner': 'DeepSeek-R1',
+            'deepseek-pro': 'DeepSeek-Pro'
+        };
+        
+        // 模型初始欢迎语
+        const modelWelcomeMessages = {
+            'deepseek-chat': '你好！我是DeepSeek-Chat助手，有什么可以帮您的吗？',
+            'deepseek-reasoner': '你好！我是DeepSeek-R1推理助手，擅长解决复杂问题。请告诉我您的问题。',
+            'deepseek-pro': '你好！我是DeepSeek-Pro助手，可以提供专业领域的帮助。'
+        };
+        
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+        
+        function showError(message) {
+            errorDisplay.textContent = message;
+            setTimeout(() => {
+                errorDisplay.textContent = '';
+            }, 5000);
+        }
+        
+        function addMessage(role, content, model, isTypingEffect = false) {
+            const containerDiv = document.createElement('div');
+            containerDiv.className = `message-container ${role}`;
+            
+            const avatarDiv = document.createElement('div');
+            
+            // 根据模型选择不同的头像
+            if (model === 'deepseek-reasoner') {
+                avatarDiv.className = 'avatar reasoner-avatar';
+                avatarDiv.textContent = 'R1';
+            } else {
+                avatarDiv.className = `avatar ${role === 'user' ? 'user-avatar' : 'ai-avatar'}`;
+                avatarDiv.textContent = role === 'user' ? '你' : 'AI';
+            }
+            
+            containerDiv.appendChild(avatarDiv);
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            const messageDiv = document.createElement('div');
+            
+            // 根据模型选择不同的消息样式
+            if (model === 'deepseek-reasoner') {
+                messageDiv.className = 'message reasoner-message';
+            } else {
+                messageDiv.className = `message ${role}-message`;
+            }
+            
+            // 添加消息内容
+            const contentNode = document.createElement('div');
+            
+            if (isTypingEffect && role === 'ai') {
+                // 如果是AI消息且需要打字效果，初始为空
+                contentNode.textContent = '';
+            } else {
+                contentNode.textContent = content;
+            }
+            
+            messageDiv.appendChild(contentNode);
+            
+            // 如果是AI消息，添加模型标签
+            if (role === 'ai' && model) {
+                const modelTag = document.createElement('span');
+                modelTag.className = model === 'deepseek-reasoner' ? 'model-tag reasoner-tag' : 'model-tag';
+                modelTag.textContent = model;
+                messageDiv.appendChild(modelTag);
+            }
+            
+            contentDiv.appendChild(messageDiv);
+            
+            const timeDiv = document.createElement('div');
+            timeDiv.className = `timestamp ${role}-timestamp`;
+            timeDiv.textContent = getCurrentTime();
+            contentDiv.appendChild(timeDiv);
+            
+            containerDiv.appendChild(contentDiv);
+            chatBox.appendChild(containerDiv);
+            
+            // 自动滚动到最新消息
+            setTimeout(() => {
+                const inputHeight = document.querySelector('.input-container').offsetHeight;
+                window.scrollTo({
+                    top: document.body.scrollHeight - inputHeight,
+                    behavior: 'smooth'
+                });
+            }, 50);
+            
+            // 添加到对话历史
+            conversationHistory.push({ 
+                role: role === 'user' ? 'user' : 'assistant', 
+                content 
+            });
+            
+            // 如果是AI消息且需要打字效果，启动打字动画
+            if (isTypingEffect && role === 'ai') {
+                typewriterEffect(contentNode, content);
+            }
+            
+            return { container: containerDiv, contentNode };
+        }
+        
+        // 打字机效果实现
+        function typewriterEffect(element, text, speed = 20) {
+            let i = 0;
+            const cursor = document.createElement('span');
+            cursor.className = 'typewriter-cursor';
+            element.appendChild(cursor);
+            
+            function type() {
+                if (i < text.length) {
+                    element.insertBefore(document.createTextNode(text.charAt(i)), cursor);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // 打字完成，移除光标
+                    element.removeChild(cursor);
+                }
+            }
+            
+            type();
+        }
+        
+        function showTypingIndicator(model) {
+            const containerDiv = document.createElement('div');
+            containerDiv.className = 'message-container ai';
+            
+            const avatarDiv = document.createElement('div');
+            
+            // 根据模型选择不同的头像
+            if (model === 'deepseek-reasoner') {
+                avatarDiv.className = 'avatar reasoner-avatar';
+                avatarDiv.textContent = 'R1';
+            } else {
+                avatarDiv.className = 'avatar ai-avatar';
+                avatarDiv.textContent = 'AI';
+            }
+            
+            containerDiv.appendChild(avatarDiv);
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            
+            const messageDiv = document.createElement('div');
+            
+            // 根据模型选择不同的消息样式
+            if (model === 'deepseek-reasoner') {
+                messageDiv.className = 'message reasoner-message';
+            } else {
+                messageDiv.className = 'message ai-message';
+            }
+            
+            messageDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+            contentDiv.appendChild(messageDiv);
+            
+            containerDiv.appendChild(contentDiv);
+            chatBox.appendChild(containerDiv);
+            
+            // 自动滚动
+            setTimeout(() => {
+                const inputHeight = document.querySelector('.input-container').offsetHeight;
+                window.scrollTo({
+                    top: document.body.scrollHeight - inputHeight,
+                    behavior: 'smooth'
+                });
+            }, 50);
+            
+            return containerDiv;
+        }
+        
+        async function getAIResponse(userMessage, model) {
+            // 显示"正在输入"指示器
+            const typingIndicator = showTypingIndicator(model);
+            
+            try {
+                // 确保对话历史格式正确
+                const messages = conversationHistory.map(msg => ({
+                    role: msg.role,
+                    content: msg.content
+                }));
+                
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`, 
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        model: model,
+                        messages: messages,
+                        temperature: 0.7,
+                        max_tokens: 2000,
+                        stream: false
+                    })
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || `API请求失败: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.choices || !data.choices[0].message) {
+                    throw new Error('API返回数据格式不正确');
+                }
+                
+                const aiResponse = data.choices[0].message.content;
+                
+                // 移除"正在输入"指示器并添加真实回复（带打字效果）
+                chatBox.removeChild(typingIndicator);
+                addMessage('ai', aiResponse, model, true);
+                
+            } catch (error) {
+                console.error('API请求错误:', error);
+                chatBox.removeChild(typingIndicator);
+                showError(`请求出错: ${error.message}`);
+                addMessage('ai', '抱歉，处理您的请求时出现了问题。请稍后再试。', model);
+            }
+        }
+        
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (message) {
+                const selectedModel = modelSelect.value;
+                addMessage('user', message, selectedModel);
+                userInput.value = '';
+                
+                // 如果是第一条用户消息且选择了DeepSeek-R1，添加欢迎语
+                if (conversationHistory.length === 1 && selectedModel === 'deepseek-reasoner') {
+                    const welcomeMessage = modelWelcomeMessages[selectedModel];
+                    addMessage('ai', welcomeMessage, selectedModel);
+                }
+                
+                // 获取AI回复
+                getAIResponse(message, selectedModel);
+            }
+        }
+        
+        // 模型选择变化时更新显示
+        modelSelect.addEventListener('change', function() {
+            const selectedModel = this.value;
+            modelInfo.textContent = `(${modelDisplayNames[selectedModel]}模型)`;
+            
+            // 如果还没有对话历史，更新欢迎消息
+            if (conversationHistory.length <= 1) {
+                document.querySelector('.welcome-message').textContent = 
+                    selectedModel === 'deepseek-reasoner' 
+                    ? '请在下方的输入框中输入您的问题' 
+                    : '请在下方的输入框中输入您的问题';
+            }
+        });
+        
+        sendBtn.addEventListener('click', sendMessage);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
