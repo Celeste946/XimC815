@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>中国数据地图</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        #map {
+            width: 100%;
+            height: 600px;
+            margin-top: 20px;
+            border-radius: 4px;
+            background: white;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        button, select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border-color: #2980b9;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        select {
+            min-width: 150px;
+        }
+        select:focus, button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #95a5a6;
+            font-size: 12px;
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            animation: modalopen 0.3s;
+        }
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        .modal-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .modal-button {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .modal-button.confirm {
+            background-color: #3498db;
+            color: white;
+            border: none;
+        }
+        .modal-button.cancel {
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- 数据加载提示模态框 -->
+    <div id="data-load-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-title">数据加载提示</div>
+            <p>完整数据集包含全国34个省级行政区的详细数据，加载可能需要更多时间。</p>
+            <p>您希望加载完整数据还是简化数据？</p>
+            <div class="modal-buttons">
+                <button class="modal-button cancel" id="load-simple">简化数据(13省)</button>
+                <button class="modal-button confirm" id="load-full">完整数据(34省)</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>中国省级数据地图</h1>
+        <p class="subtitle">点击省份查看详细信息</p>
+        
+        <div class="controls">
+            <button id="reset-view">重置视图</button>
+            <button id="toggle-labels">切换标签</button>
+            <select id="data-selector">
+                <option value="population">人口数据(万人)</option>
+                <option value="gdp">GDP数据(亿元)</option>
+            </select>
+        </div>
+        
+        <div id="map"></div>
+        
+        <div class="footer">
+            数据仅供参考 | 使用ECharts绘制
+        </div>
+    </div>
+
+    <script>
+        // 完整数据集
+        const fullData = {
+            '北京市': { population: 2171, gdp: 36103 },
+            '天津市': { population: 1560, gdp: 14084 },
+            '河北省': { population: 7592, gdp: 36207 },
+            '山西省': { population: 3729, gdp: 17652 },
+            '内蒙古自治区': { population: 2534, gdp: 17213 },
+            '辽宁省': { population: 4359, gdp: 25115 },
+            '吉林省': { population: 2704, gdp: 12311 },
+            '黑龙江省': { population: 3751, gdp: 13699 },
+            '上海市': { population: 2424, gdp: 38701 },
+            '江苏省': { population: 8051, gdp: 102719 },
+            '浙江省': { population: 5850, gdp: 62352 },
+            '安徽省': { population: 6324, gdp: 38681 },
+            '福建省': { population: 3973, gdp: 42395 },
+            '江西省': { population: 4666, gdp: 24758 },
+            '山东省': { population: 10070, gdp: 71068 },
+            '河南省': { population: 9883, gdp: 54259 },
+            '湖北省': { population: 5927, gdp: 43443 },
+            '湖南省': { population: 6918, gdp: 39752 },
+            '广东省': { population: 12601, gdp: 110761 },
+            '广西壮族自治区': { population: 4926, gdp: 22157 },
+            '海南省': { population: 934, gdp: 5532 },
+            '重庆市': { population: 3102, gdp: 25003 },
+            '四川省': { population: 8375, gdp: 46616 },
+            '贵州省': { population: 3856, gdp: 16769 },
+            '云南省': { population: 4801, gdp: 24522 },
+            '西藏自治区': { population: 335, gdp: 1903 },
+            '陕西省': { population: 3953, gdp: 25793 },
+            '甘肃省': { population: 2647, gdp: 9017 },
+            '青海省': { population: 592, gdp: 3010 },
+            '宁夏回族自治区': { population: 688, gdp: 3921 },
+            '新疆维吾尔自治区': { population: 2459, gdp: 13798 },
+            '香港特别行政区': { population: 748, gdp: 24280 },
+            '澳门特别行政区': { population: 68, gdp: 1944 },
+            '台湾省': { population: 2357, gdp: 41483 }
+        };
+
+        // 简化数据集
+        const simpleData = {
+            '北京市': { population: 2171, gdp: 36103 },
+            '上海市': { population: 2424, gdp: 38701 },
+            '广东省': { population: 12601, gdp: 110761 },
+            '江苏省': { population: 8051, gdp: 102719 },
+            '浙江省': { population: 5850, gdp: 62352 },
+            '四川省': { population: 8375, gdp: 46616 },
+            '湖北省': { population: 5927, gdp: 43443 },
+            '福建省': { population: 3973, gdp: 42395 },
+            '湖南省': { population: 6918, gdp: 39752 },
+            '安徽省': { population: 6324, gdp: 38681 },
+            '河南省': { population: 9883, gdp: 54259 },
+            '山东省': { population: 10070, gdp: 71068 },
+            '西藏自治区': { population: 335, gdp: 1903 }
+        };
+
+        // 初始化变量
+        const chart = echarts.init(document.getElementById('map'));
+        let currentDataType = 'population';
+        let showLabels = true;
+        let currentData = simpleData; // 默认使用简化数据
+        
+        // 显示数据加载提示框
+        const modal = document.getElementById('data-load-modal');
+        document.addEventListener('DOMContentLoaded', () => {
+            modal.style.display = 'block';
+        });
+        
+        // 模态框按钮事件
+        document.getElementById('load-full').addEventListener('click', () => {
+            currentData = fullData;
+            modal.style.display = 'none';
+            initializeMap();
+        });
+        
+        document.getElementById('load-simple').addEventListener('click', () => {
+            currentData = simpleData;
+            modal.style.display = 'none';
+            initializeMap();
+        });
+        
+        // 初始化地图
+        function initializeMap() {
+            fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+                .then(res => res.json())
+                .then(geoJson => {
+                    echarts.registerMap('china', geoJson);
+                    renderMap();
+                    
+                    // 交互事件
+                    chart.on('click', params => {
+                        const info = currentData[params.name] || {};
+                        const value = info[currentDataType] || 0;
+                        const unit = currentDataType === 'population' ? '万人' : '亿元';
+                        
+                        chart.dispatchAction({
+                            type: 'showTip',
+                            seriesIndex: 0,
+                            name: params.name,
+                            position: [params.event.event.offsetX, params.event.event.offsetY]
+                        });
+                    });
+                    
+                    document.getElementById('reset-view').addEventListener('click', () => {
+                        chart.dispatchAction({ type: 'restore' });
+                    });
+                    
+                    document.getElementById('toggle-labels').addEventListener('click', () => {
+                        showLabels = !showLabels;
+                        renderMap();
+                    });
+                    
+                    document.getElementById('data-selector').addEventListener('change', (e) => {
+                        currentDataType = e.target.value;
+                        renderMap();
+                    });
+                    
+                    window.addEventListener('resize', () => chart.resize());
+                });
+        }
+        
+        // 渲染地图
+        function renderMap() {
+            const option = {
+                backgroundColor: 'transparent',
+                tooltip: {
+                    trigger: 'item',
+                    formatter: params => {
+                        const info = currentData[params.name] || {};
+                        const value = info[currentDataType] || 0;
+                        const unit = currentDataType === 'population' ? '万人' : '亿元';
+                        return `
+                            <div style="font-weight:bold;margin-bottom:5px">${params.name}</div>
+                            <div>${currentDataType === 'population' ? '人口' : 'GDP'}: ${value}${unit}</div>
+                        `;
+                    }
+                },
+                visualMap: {
+                    min: 0,
+                    max: currentDataType === 'population' ? 12000 : 120000,
+                    text: ['高', '低'],
+                    realtime: false,
+                    inRange: {
+                        color: currentDataType === 'population' 
+                            ? ['#e6f7ff', '#1890ff']
+                            : ['#fff7e6', '#fa8c16']
+                    },
+                    textStyle: {
+                        color: '#666'
+                    },
+                    bottom: 30
+                },
+                series: [{
+                    name: currentDataType === 'population' ? '人口' : 'GDP',
+                    type: 'map',
+                    map: 'china',
+                    roam: true,
+                    scaleLimit: {
+                        min: 1,
+                        max: 5
+                    },
+                    label: {
+                        show: showLabels,
+                        fontSize: 10,
+                        color: '#333'
+                    },
+                    itemStyle: {
+                        areaColor: '#f0f0f0',
+                        borderColor: '#fff',
+                        borderWidth: 1
+                    },
+                    emphasis: {
+                        label: {
+                            color: '#fff'
+                        },
+                        itemStyle: {
+                            areaColor: currentDataType === 'population' ? '#1890ff' : '#fa8c16'
+                        }
+                    },
+                    data: Object.keys(currentData).map(name => ({
+                        name,
+                        value: currentData[name][currentDataType] || 0
+                    }))
+                }]
+            };
+            chart.setOption(option);
+        }
+    </script>
+</body>
+</html>
