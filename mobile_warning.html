@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请使用电脑访问</title>
+    <link rel="icon" href="./图标.png" type="image/x - icon">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .warning-icon {
+            font-size: 60px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        .content {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .comparison {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .device {
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+            width: 200px;
+        }
+        
+        .device-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        
+        .not-recommended .device-icon {
+            color: #e74c3c;
+        }
+        
+        .recommended .device-icon {
+            color: #2ecc71;
+        }
+        
+        .device-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .device-description {
+            color: #7f8c8d;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .browser-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .browsers {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .browser {
+            text-align: center;
+        }
+        
+        .browser-icon {
+            font-size: 30px;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .browser-name {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            .comparison {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="warning-icon">
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        <h1 class="title">请使用电脑访问</h1>
+        <p class="subtitle">为了获得最佳浏览体验，我们建议您使用电脑端访问本网站。移动设备可能无法正常显示所有功能和内容。</p>
+    </div>
+    
+    <div class="content">
+        <div class="comparison">
+            <div class="device not-recommended">
+                <div class="device-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="device-title">移动设备</h3>
+                <p class="device-description">部分功能可能无法正常显示或使用，影响您的浏览体验。</p>
+            </div>
+            
+            <div class="device recommended">
+                <div class="device-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <h3 class="device-title">电脑设备</h3>
+                <p class="device-description">可以完整体验所有功能，获得最佳浏览效果。</p>
+            </div>
+        </div>
+        
+        <div class="browser-section">
+            <h2 class="section-title">推荐使用以下浏览器</h2>
+            <div class="browsers">
+                <div class="browser">
+                    <div class="browser-icon">
+                        <i class="fab fa-chrome"></i>
+                    </div>
+                    <p class="browser-name">Chrome</p>
+                </div>
+                
+                <div class="browser">
+                    <div class="browser-icon">
+                        <i class="fab fa-firefox"></i>
+                    </div>
+                    <p class="browser-name">Firefox</p>
+                </div>
+                
+                <div class="browser">
+                    <div class="browser-icon">
+                        <i class="fab fa-edge"></i>
+                    </div>
+                    <p class="browser-name">Edge</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button class="btn" onclick="window.location.href= 'https://celeste946.github.io/XincMove/index.html'">跳转移动端页面</button>
+        </div>
+    </div>
+</body>
+</html>
