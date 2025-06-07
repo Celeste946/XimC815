@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank for you</title>
+    <link rel="icon" href="./图标.png" type="image/x - icon">
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2a2a2a;
+            --accent-color: #4a90e2;
+            --text-color: #f0f0f0;
+            --text-muted: #b0b0b0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #333;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+        
+        .farewell-section {
+            background-color: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contributors-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+        }
+        
+        .contributors-container {
+            position: relative;
+            overflow: hidden;
+            padding: 1rem 0;
+        }
+        
+        .contributors-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+        
+        .contributor-card {
+            flex: 0 0 auto;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 150px;
+        }
+        
+        .contributor-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--accent-color);
+        }
+        
+        .contributor-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .contributor-role {
+            color: var(--text-muted);
+            font-size: 0.8rem; 
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+            color: var(--text-muted);
+        }
+
+        .source-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 15px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent-color);
+        }
+
+        .source-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .highlight {
+            color: var(--accent-color);
+        }
+        
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>告别与感谢</h1>
+            <p class="subtitle">一段旅程的结束，是另一段旅程的开始</p>
+        </header>
+        
+        <section class="farewell-section">
+            <h2>告别信</h2>
+            <p>
+                亲爱的老师、同学们：当教室后墙的倒计时牌终于翻到最后一页，我才突然意识到——原来相遇的夏天，早已悄悄写好了离别的注脚。
+                还记得刚踏入校园时那片忐忑的梧桐叶吗？如今它已长成我们头顶郁郁葱葱的绿荫。这两年，是你们让每一片落叶都变成值得珍藏的书签：班主任那句"再坚持一下"的批语，运动会时震耳欲聋的加油声，还有同桌悄悄推过来的半块橡皮...这些细碎的光亮，拼凑出了比朝阳更灿烂的青春。
+                特别想对（老师）说：您教给我们的不仅是知识，更是像课间操时那棵老槐树一样，永远向上生长的力量。那些被粉笔灰染白的袖口，那些作业本上的红色批注，都会成为我们人生考卷上最温暖的提示符。
+                也要对我的伙伴们说：或许未来会有比小卖部冰淇淋更甜的遇见，但再不会有偷吃零食时互相打掩护的心跳；会有比月考进步更骄傲的成就，但再不会有用同一本参考书的革命情谊。请记住此刻映在彼此眼中的星光，那是我们用八百个日夜酿成的独家记忆。
+                最后想对初二（15）班说：我们的故事不是被风吹散的蒲公英，而是深埋土壤的种子。当校服变成回忆的入场券，当初夏的蝉鸣第无数次响起，我依然会记得，在这里，我们曾笨拙又热烈地，学会了什么是成长。 致敬
+                <br><a target="_blank" href="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4597154d71c0a4bd8ebe895167d9ed8c3f6e6af86c1f9663f4ccd1b9373c4387b0ba227abee54d2fe4390bd4f9323483?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347193729.jpg&size=750"><img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/4597154d71c0a4bd8ebe895167d9ed8c3f6e6af86c1f9663f4ccd1b9373c4387b0ba227abee54d2fe4390bd4f9323483?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1741347193729.jpg&size=750" style="border-radius: 5px; margin-top: 10px;" width="850" height="350" alt=""></a>
+            </p>
+            <p class="highlight">—— 团队全体成员</p>
+        </section>
+        
+        <section class="contributors-section">
+            <h2>贡献者</h2>
+            <div class="contributors-container">
+                <div class="contributors-track" id="contributorsTrack">
+                    <!-- 第一组贡献者 -->
+                    <div class="contributor-card">
+                        <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/feb063e7d77d0c9e49bc17969dce6f6803d145b04f043ad8ba8563f173c6af1c4c998e9962f7bf9d94dad5be4f846c6c?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1744972768144.jpeg&size=750" alt="张美丽" class="avatar">
+                        <div class="contributor-name">叶泽良</div>
+                        <div class="contributor-role">首席开发者CEO</div>
+                    </div>
+                    
+                    <div class="contributor-card">
+                        <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/edeb809a0e650283c03c32f94611c0e42a2bcb8b716d4ff13f8a7c1e70e55933e13f6538bd3744df4f366cef070604b7?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747493064244.jpg&size=750" alt="李智慧" class="avatar">
+                        <div class="contributor-name">黎俊豪</div>
+                        <div class="contributor-role">资源提供</div>
+                    </div>
+                    
+                    <div class="contributor-card">
+                        <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/357eb2e106e13f635a38aa37eb3ad83ba9b5818d97ac3b69e39d74839423d9ed98d304272e4c5c4da91b87fecf28589e?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1746852685204.jpg&size=750" alt="王创意" class="avatar">
+                        <div class="contributor-name">廖宁</div>
+                        <div class="contributor-role">支持与鼓励</div>
+                    </div>
+
+                    <div class="contributor-card">
+                        <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/145090f998d7d4e94463f3595f6cd2f9b5cd758147f2d53247ae01c108042140f2da3d1bbae47612c7662688e1021ff0?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747493700756.jpg&size=750" alt="王创意" class="avatar">
+                        <div class="contributor-name">叶浩锋</div>
+                        <div class="contributor-role">资源提供</div>
+                    </div>
+
+                    <div class="contributor-card">
+                        <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/e6855fd296de5cc6a0f83257004a9b3f663e41fac211271e74ff03bd25294cc67224ec26babaea3a0a3815b96b814e4c?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747493763400.jpg&size=750" alt="王创意" class="avatar">
+                        <div class="contributor-name">陈曼熙</div>
+                        <div class="contributor-role">资源提供</div>
+                    </div>
+
+                    <div class="contributor-card">
+                        <img src="https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/c776fd3d0250dcdf4f3734ebf4c7abb554380aa8a76e27faa54dc7cf6739b680b6e70e3f0ac3d4badf1fda0b1a321273?pictype=scale&from=30113&version=3.3.3.3&fname=mmexport1747493788578.jpg&size=750" alt="王创意" class="avatar">
+                        <div class="contributor-name">尹梓彤</div>
+                        <div class="contributor-role">资源提供</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2025 初二15班. 保留所有权利.</p>
+            <p>感谢您的支持与陪伴</p>
+            <a href="https://gitee.com/Harrison_Yutub/discussion-on-class-website" target="_blank" class="source-btn">
+                <svg viewBox="0 0 1024 1024" width="20" height="20">
+                    <path d="M512 1024C229.2224 1024 0 794.7776 0 512S229.2224 0 512 0s512 229.2224 512 512-229.2224 512-512 512z m259.1488-568.8832H480.4096a25.2928 25.2928 0 0 0-25.2928 25.2928l-0.0256 63.2064c0 13.952 11.3152 25.2928 25.2672 25.2928h177.024c13.9776 0 25.2928 11.3152 25.2928 25.2672v12.6464a75.8528 75.8528 0 0 1-75.8528 75.8528H366.592a25.2928 25.2928 0 0 1-25.2672-25.2928v-240.1792a75.8528 75.8528 0 0 1 75.8272-75.8528h353.9456a25.2928 25.2928 0 0 0 25.2672-25.2928l0.0768-63.2064a25.2928 25.2928 0 0 0-25.2672-25.2928H417.152a189.6192 189.6192 0 0 0-189.6192 189.6448v353.9456c0 13.9776 11.3152 25.2928 25.2928 25.2928h372.9408a170.6496 170.6496 0 0 0 170.6496-170.6496v-145.408a25.2928 25.2928 0 0 0-25.2928-25.2672z" fill="currentColor"></path>
+                </svg>
+                <span>查看所有源代码</span>
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // 确保动画无缝循环
+        document.addEventListener('DOMContentLoaded', function() {
+            const track = document.getElementById('contributorsTrack');
+            const cards = document.querySelectorAll('.contributor-card');
+            const cardWidth = cards[0].offsetWidth + 24; // 包括gap
+            
+            // 克隆第一组卡片添加到末尾，实现无缝循环
+            const firstGroup = Array.from(cards).slice(0, 3); // 前6个卡片
+            firstGroup.forEach(card => {
+                const clone = card.cloneNode(true);
+                track.appendChild(clone);
+            });
+            
+            // 重置动画
+            track.style.animation = 'none';
+            void track.offsetWidth; // 触发重绘
+            track.style.animation = 'scroll 12s linear infinite'; // 重新设置动画
+        });
+    </script>
+</body>
+</html>
